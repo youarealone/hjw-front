@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_discount"
+        android:title="@string/menu_discount"
+        android:icon="@drawable/ic_discount"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/menu_location"
+        android:title="@string/menu_location"
+        android:icon="@drawable/ic_pointer"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:title="@string/menu_schedule"
+        android:icon="@drawable/ic_checkbox"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:title="@string/menu_discount"
+        android:icon="@drawable/ic_contact"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:title="@string/menu_discount"
+        android:icon="@drawable/ic_account"
+        app:showAsAction="ifRoom"/>
+</menu>

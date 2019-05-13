@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">hjw-front</string>
+    <string name="app_name">혼자완?</string>
+    <string name="menu_discount">할인 받안?</string>
+    <string name="menu_location">너 어디 인?</string>
+    <string name="menu_schedule">오늘 뭐하맨?</string>
 </resources>

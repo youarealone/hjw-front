@@ -28,23 +28,23 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.menu_discount:
-                        changeFragment(new FirstFragment());
+                        changeFragment(new DiscountFragment());
                         break;
 
                     case R.id.menu_location:
-                        changeFragment(new SecondFragment());
+                        changeFragment(new LocationFragment());
                         break;
 
                     case R.id.menu_schedule:
-                        changeFragment(new ThirdFragment());
+                        changeFragment(new ScheduleFragment());
                         break;
 
                     case R.id.menu_sos:
-                        changeFragment(new FourthFragment());
+                        changeFragment(new SosFragment());
                         break;
 
                     case R.id.menu_login:
-                        changeFragment(new FifthFragment());
+                        changeFragment(new LoginFragment());
                         break;
 
                     default:

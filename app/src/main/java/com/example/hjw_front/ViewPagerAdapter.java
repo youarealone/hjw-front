@@ -26,7 +26,7 @@ public class ViewPagerAdapter extends PagerAdapter {
         if (context != null) {
             // LayoutInflater를 통해 "/res/layout/page.xml"을 뷰로 생성.
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.fragment_1, container, false);
+            view = inflater.inflate(R.layout.fragment_discount, container, false);
         }
 
         // 뷰페이저에 추가.

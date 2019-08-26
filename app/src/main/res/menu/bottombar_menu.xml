@@ -19,12 +19,12 @@
         app:showAsAction="ifRoom"/>
 
     <item
-        android:title="@string/menu_discount"
+        android:title="@string/menu_sos"
         android:icon="@drawable/ic_contact"
         app:showAsAction="ifRoom"/>
 
     <item
-        android:title="@string/menu_discount"
+        android:title="@string/menu_login"
         android:icon="@drawable/ic_account"
         app:showAsAction="ifRoom"/>
 </menu>

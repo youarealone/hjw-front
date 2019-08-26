@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">혼자완?</string>
     <string name="menu_discount">할인 받안?</string>
-    <string name="menu_location">너 어디 인?</string>
+    <string name="menu_location">여기 뭐이서?</string>
     <string name="menu_schedule">오늘 뭐하맨?</string>
+    <string name="menu_sos">SOS 메세지</string>
+    <string name="menu_mypage">내정보</string>
+    <string name="menu_login">로그인</string>
     <string name="splash_logo">스플래시 로고</string>
 </resources>

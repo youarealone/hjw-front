@@ -14,17 +14,20 @@
         app:showAsAction="ifRoom"/>
 
     <item
+        android:id="@+id/menu_schedule"
         android:title="@string/menu_schedule"
         android:icon="@drawable/ic_checkbox"
         app:showAsAction="ifRoom"/>
 
     <item
-        android:title="@string/menu_discount"
+        android:id="@+id/menu_sos"
+        android:title="@string/menu_sos"
         android:icon="@drawable/ic_contact"
         app:showAsAction="ifRoom"/>
 
     <item
-        android:title="@string/menu_discount"
+        android:id="@+id/menu_login"
+        android:title="@string/menu_login"
         android:icon="@drawable/ic_account"
         app:showAsAction="ifRoom"/>
 </menu>

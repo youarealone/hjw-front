@@ -24,7 +24,7 @@
             android:background="@drawable/underline"
             android:textColorHint="@color/colorLight"
             android:textSize="15dp"
-            android:hint="검색">
+            android:hint="#오늘의 핫플">
             <requestFocus/>
         </EditText>
 

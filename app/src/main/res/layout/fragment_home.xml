@@ -23,7 +23,7 @@
             android:background="@drawable/underline"
             android:textColor="@color/colorLight"
             android:textSize="15dp"
-            android:text="검색"/>
+            android:text="#오늘의 핫플"/>
 
         <ImageView
             android:layout_width="20dp"

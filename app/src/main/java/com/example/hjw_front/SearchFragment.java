@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.apmem.tools.layouts.FlowLayout;
@@ -68,7 +67,7 @@ public class SearchFragment extends Fragment {
             button.setTextColor(ContextCompat.getColor(getContext(), R.color.white));
             button.setTextSize(15);
             button.setTypeface(button.getTypeface(), Typeface.BOLD);
-            button.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.blue_round_button));
+            button.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.blue_round_background));
             button.setPadding(20, 10, 20, 10);
 
             FlowLayout.LayoutParams lp = new FlowLayout.LayoutParams(

@@ -32,4 +32,10 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/btn_userInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(임시) 개인정보 조회/수정"/>
+
 </LinearLayout>

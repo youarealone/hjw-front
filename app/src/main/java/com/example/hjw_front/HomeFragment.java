@@ -32,6 +32,13 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        view.findViewById(R.id.btn_userInfo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fragmentChanger.changeFragment(new UserInfoFragment());
+            }
+        });
+
         return view;
     }
 }

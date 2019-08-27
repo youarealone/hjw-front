@@ -10,7 +10,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="70dp">
+        android:layout_margin="60dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,7 +39,10 @@
             android:orientation="vertical"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:padding="10dp"
+            android:paddingTop="20dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="20dp"
+            android:paddingLeft="10dp"
             android:background="@drawable/round_border">
 
             <EditText
@@ -52,6 +55,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
                 android:textColorHint="@color/colorLight"
                 android:textSize="14dp"
                 android:hint="PASSWORD"/>
@@ -61,6 +65,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="5dp"
             android:orientation="horizontal">
 
             <TextView

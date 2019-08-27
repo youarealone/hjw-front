@@ -14,6 +14,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.apmem.tools.layouts.FlowLayout;
+
 public class SearchFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -29,10 +31,10 @@ public class SearchFragment extends Fragment {
 
     private void setHashtags(View view) {
         String[] hashtags = {
-                "#제주핫플", "#제주여행", "#바다", "#함덕", "#세화", "#애월", "#제주오름", "#제주카페", "제주혼행"
+                "#제주핫플","#바다", "#함덕", "#세화",  "#제주여행", "#애월", "#제주오름", "#제주카페", "#제주혼행"
         };
 
-        LinearLayout container = view.findViewById(R.id.container_hashtags);
+        FlowLayout container = view.findViewById(R.id.container_hashtags);
 
         for (String hashtag: hashtags) {
             TextView textView = new TextView(getContext());
@@ -44,7 +46,7 @@ public class SearchFragment extends Fragment {
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                     ViewGroup.LayoutParams.WRAP_CONTENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT);
-            lp.setMargins(0,0,15,0);
+            lp.setMargins(0,0,30,30);
             textView.setLayoutParams(lp);
 
             container.addView(textView);

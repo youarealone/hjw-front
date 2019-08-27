@@ -7,4 +7,6 @@
     <string name="menu_mypage">내정보</string>
     <string name="menu_login">로그인</string>
     <string name="splash_logo">스플래시 로고</string>
+    <string name="signup_underline"><u>회원가입</u></string>
+    <string name="findAccount_underline"><u>아이디/비밀번호 찾기</u></string>
 </resources>

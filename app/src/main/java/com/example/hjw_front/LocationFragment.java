@@ -10,7 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.hjw_front.utils.PermissionChecker;
 import net.daum.mf.map.api.MapView;
+import static net.daum.mf.map.api.MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading;
 
 public class LocationFragment extends Fragment {
     private Activity activity;
@@ -31,6 +33,11 @@ public class LocationFragment extends Fragment {
 
         ViewGroup mapViewContainer = view.findViewById(R.id.map_view);
         mapViewContainer.addView(mapView);
+
+        PermissionChecker permissionChecker = new PermissionChecker(activity);
+        if (permissionChecker.isPermit()) {
+            mapView.setCurrentLocationTrackingMode(TrackingModeOnWithoutHeading);
+        }
 
         return view;
     }

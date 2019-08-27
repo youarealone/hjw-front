@@ -54,6 +54,7 @@
         android:background="@drawable/blue_round_button"
         android:layout_gravity="center"
         android:gravity="center"
+        android:layout_marginTop="20dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:paddingStart="20dp"
@@ -64,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:text="많이 검색한 단어"
-            android:textColor="#fff"
+            android:textColor="@color/white"
             android:textStyle="bold"
             android:textSize="15dp"/>
 
@@ -72,7 +73,19 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:src="@drawable/ic_white_search"/>
-
     </LinearLayout>
+    <org.apmem.tools.layouts.FlowLayout
+        android:id="@+id/container_keywords"
+        f:layout_newLine="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="10dp"
+        android:paddingStart="40dp"
+        android:paddingBottom="10dp"
+        android:paddingEnd="40dp">
+
+    </org.apmem.tools.layouts.FlowLayout>
+
 
 </LinearLayout>

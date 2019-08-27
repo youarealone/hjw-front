@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:f="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <EditText
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:padding="5dp"
+            android:background="@drawable/underline"
+            android:textColorHint="@color/colorLight"
+            android:textSize="15dp"
+            android:hint="#오늘의 핫플">
+            <requestFocus/>
+        </EditText>
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_search"/>
+    </LinearLayout>
+
+    <org.apmem.tools.layouts.FlowLayout
+        android:id="@+id/container_hashtags"
+        f:layout_newLine="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="10dp"
+        android:paddingStart="40dp"
+        android:paddingBottom="10dp"
+        android:paddingEnd="40dp">
+
+    </org.apmem.tools.layouts.FlowLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/blue_round_button"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:text="많이 검색한 단어"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="15dp"/>
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/ic_white_search"/>
+    </LinearLayout>
+    <org.apmem.tools.layouts.FlowLayout
+        android:id="@+id/container_keywords"
+        f:layout_newLine="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="10dp"
+        android:paddingStart="40dp"
+        android:paddingBottom="10dp"
+        android:paddingEnd="40dp">
+
+    </org.apmem.tools.layouts.FlowLayout>
+
+
+</LinearLayout>

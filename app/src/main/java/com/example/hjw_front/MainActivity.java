@@ -4,15 +4,20 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.hjw_front.utils.FragmentChanger ;
+
 public class MainActivity extends AppCompatActivity {
+    FragmentChanger fragmentChanger = null;
+
+    public MainActivity() {
+        this.fragmentChanger = new FragmentChanger(getSupportFragmentManager());
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -23,13 +28,13 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        changeFragment(new HomeFragment());
+        fragmentChanger.changeFragment( new HomeFragment());
 
         ImageView logo = findViewById(R.id.iv_logo);
         logo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeFragment(new HomeFragment());
+                fragmentChanger.changeFragment(new HomeFragment());
             }
         });
 
@@ -39,23 +44,23 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.menu_discount:
-                        changeFragment(new DiscountFragment());
+                        fragmentChanger.changeFragment(new DiscountFragment());
                         break;
 
                     case R.id.menu_location:
-                        changeFragment(new LocationFragment());
+                        fragmentChanger.changeFragment(new LocationFragment());
                         break;
 
                     case R.id.menu_schedule:
-                        changeFragment(new ScheduleFragment());
+                        fragmentChanger.changeFragment(new ScheduleFragment());
                         break;
 
                     case R.id.menu_sos:
-                        changeFragment(new SosFragment());
+                        fragmentChanger.changeFragment(new SosFragment());
                         break;
 
                     case R.id.menu_login:
-                        changeFragment(new LoginFragment());
+                        fragmentChanger.changeFragment(new LoginFragment());
                         break;
 
                     default:
@@ -66,10 +71,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    private void changeFragment(Fragment fragment) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.container, fragment).commitAllowingStateLoss();
     }
 }

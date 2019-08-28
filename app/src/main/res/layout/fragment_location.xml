@@ -25,13 +25,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 
-            <TextView
+            <Button
+                android:id="@+id/btn_current"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
+                android:background="@color/transparent"
                 android:text="현재 위치"
                 android:textColor="@color/white"
                 android:textSize="20dp"
@@ -40,17 +41,20 @@
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
+                android:baseline="20dp"
                 android:src="@drawable/ic_white_pointer"/>
 
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tv_addr_doro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="제주 서귀포시 안덕면 병악로 166"
             android:textColor="@color/white"/>
 
         <TextView
+            android:id="@+id/tv_addr_jibun"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="지번: 상창리 271"

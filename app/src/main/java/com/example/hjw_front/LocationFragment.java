@@ -45,7 +45,7 @@ public class LocationFragment extends Fragment {
     public String currentLocation; // 그래서 최종 위치
 
     private TextView tvDoro;
-    private TextView tvJiBun;
+//    private TextView tvJiBun;
     private Button btnCurrent;
     private MapView mapView;
 
@@ -62,7 +62,7 @@ public class LocationFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_location, container, false);
 
         tvDoro = view.findViewById(R.id.tv_addr_doro);
-        tvJiBun = view.findViewById(R.id.tv_addr_jibun);
+//        tvJiBun = view.findViewById(R.id.tv_addr_jibun);
         btnCurrent = view.findViewById(R.id.btn_current);
 
         setMapView(view);

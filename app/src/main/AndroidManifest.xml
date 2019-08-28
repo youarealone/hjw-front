@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.hjw_front">
 
+    <uses-permission android:name="android.permission.INTERNET">
+    </uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION">
+    </uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/hjw_logo"
@@ -9,6 +15,9 @@
         android:roundIcon="@mipmap/hjw_logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data android:name="com.kakao.sdk.AppKey" android:value="d948ab0542bbaef9eda02f65e48c7309"/>
+
         <activity
             android:name=".splash"
             android:theme="@style/splash">
@@ -20,5 +29,4 @@
         </activity>
         <activity android:name=".MainActivity"></activity>
     </application>
-
 </manifest>

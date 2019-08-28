@@ -1,0 +1,33 @@
+From 4cc404791101f62ce2e3237bfe232ff91ca7aeb7 Mon Sep 17 00:00:00 2001
+From: chimaek <pipiru100@gmail.com>
+Date: Wed, 28 Aug 2019 21:39:58 +0900
+Subject: [PATCH] Merge branch 'feature/F28' of
+ https://github.com/youarealone/hjw-front into develop
+
+# Conflicts:
+#	app/src/main/AndroidManifest.xml
+#	app/src/main/res/layout/fragment_sos.xml
+---
+ app/src/main/res/drawable/xml_border.xml | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+ create mode 100644 app/src/main/res/drawable/xml_border.xml
+
+diff --git a/app/src/main/res/drawable/xml_border.xml b/app/src/main/res/drawable/xml_border.xml
+new file mode 100644
+index 0000000..61acce0
+--- /dev/null
++++ b/app/src/main/res/drawable/xml_border.xml
+@@ -0,0 +1,10 @@
++<?xml version="1.0" encoding="utf-8"?>
++<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
++    <item>
++        <shape android:shape="rectangle">
++            <stroke android:width="10dp" android:color="#FF000000" />
++            <solid android:color="#65FFFFFF" />
++            <
++        </shape>
++    </item>
++</layer-list>
+-- 
+2.23.0.windows.1
+

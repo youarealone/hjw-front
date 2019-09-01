@@ -18,17 +18,8 @@ public class ContractFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_contract, container, false);
 
-        List<contract_data> datas = contract_loader.getData(getContext());
 
-        contract_Adapter adapter = new contract_Adapter(datas);
-
-        RecyclerView recyclerView = view.findViewById(R.id.list_contract);
-        recyclerView.setAdapter(adapter);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        return view;
+        return inflater.inflate(R.layout.fragment_contract, container, false);
     }
 }

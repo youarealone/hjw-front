@@ -25,19 +25,9 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        view.findViewById(R.id.container_search).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fragmentChanger.changeFragment(new SearchFragment());
-            }
-        });
+        view.findViewById(R.id.container_search).setOnClickListener(v -> fragmentChanger.changeFragment(new SearchFragment()));
 
-        view.findViewById(R.id.btn_userInfo).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fragmentChanger.changeFragment(new UserInfoFragment());
-            }
-        });
+        view.findViewById(R.id.btn_userInfo).setOnClickListener(v -> fragmentChanger.changeFragment(new UserInfoFragment()));
 
         return view;
     }

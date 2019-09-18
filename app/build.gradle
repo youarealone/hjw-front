@@ -20,6 +20,14 @@ android {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
     }
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'x86', 'x86_64', 'armeabi-v7a', 'armeabi'
+            universalApk false
+        }
+    }
 }
 
 dependencies {

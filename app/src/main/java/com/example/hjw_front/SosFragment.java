@@ -53,13 +53,14 @@ public class SosFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_sos, container, false);
+
         final Switch SwitchSOS = view.findViewById(R.id.switch2);
         Button btn_sound = view.findViewById(R.id.btn_sound);
         ImageView imageView = view.findViewById(R.id.img_sound);
 
         index = 0;
 
-        view.findViewById(R.id.textView5).setOnClickListener(v -> fragmentChanger.changeFragment(new ContractFragment()));
+        view.findViewById(R.id.getContract).setOnClickListener(v -> fragmentChanger.changeFragment(new ContractFragment()));
 
         btn_sound.setOnClickListener(v -> {
             index = index != list_sound.length - 1 ? index + 1 : 0;
@@ -89,7 +90,7 @@ public class SosFragment extends Fragment {
         builder.setSmallIcon(R.mipmap.hjw_logo_round);
         builder.setLargeIcon(LargeIconSOS);
         builder.setContentTitle("SOS 메세지 기능 활성화");
-        builder.setContentText("누르시면 5분후 지정된 연락처로 메세지가 전송됩니다.");
+        builder.setContentText("누르시면 지정된 연락처로 메세지가 전송됩니다.");
 
         builder.setColor(Color.RED);
         // 사용자가 탭을 클릭하면 자동 제거

@@ -1,10 +1,12 @@
 package com.example.hjw_front;
 
+import android.Manifest;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -15,6 +17,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +45,8 @@ public class SosFragment extends Fragment {
     FragmentChanger fragmentChanger = null;
     final String[] list_sound = {"소리", "진동", "무음"};
     private int index;
+    private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 100;
+    private static final int PERMISSIONS_REQUEST_WRITE_CONTACTS = 101;
 
     @Override
     public void onAttach(Context context) {
@@ -112,4 +117,6 @@ public class SosFragment extends Fragment {
         // Notification 제거
         NotificationManagerCompat.from(this.getContext()).cancel(1);
     }
-}
+
+
+    }

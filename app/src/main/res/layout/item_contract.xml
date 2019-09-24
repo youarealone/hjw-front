@@ -8,31 +8,24 @@
     <TextView
         android:id="@+id/item_name"
         android:layout_width="90dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:text="TextView"
         android:textAlignment="center"
         android:textColor="@color/colorPrimary"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/item_num"
         android:layout_width="140dp"
-        android:layout_height="wrap_content"
-
+        android:layout_height="40dp"
         android:text="TextView"
         android:textAlignment="center"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toStartOf="@id/btn_list_rm"
-        app:layout_constraintStart_toEndOf="@id/item_name"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="20dp" />
 
     <Button
         android:id="@+id/btn_list_rm"
         android:layout_width="80dp"
         android:layout_height="40dp"
         android:text="삭제"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textAlignment="center" />
 </LinearLayout>

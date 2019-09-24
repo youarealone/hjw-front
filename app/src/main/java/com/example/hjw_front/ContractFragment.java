@@ -23,11 +23,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.hjw_front.utils.FragmentChanger;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ContractFragment extends Fragment {
@@ -35,29 +37,20 @@ public class ContractFragment extends Fragment {
     private FloatingActionButton fab_contract;
     private String name;
     private String num;
-    private RecyclerView recyclerView;
-    public RecyclerView.LayoutManager layoutManager;
-    private RecyclerView.Adapter adapter;
-
+    private RecyclerView list_sos_view;
+    private list_sos_adapter adapter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_contract, container, false);
         fab_contract = view.findViewById(R.id.fab_contract);
-        recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
+        list_sos_view = view.findViewById(R.id.sos_list_view);
 
-        //layoutManager = new GridLayoutManager(this, 1);
-        layoutManager = new LinearLayoutManager(view.getContext());
-
-
-        recyclerView.setLayoutManager(layoutManager);
+        init();
+        getData();
 
 
-
-        adapter = new RecyclerViewA();
-        recyclerView.setAdapter(adapter);
         fab_contract.setOnClickListener(view1 -> {
             // 연락처 퍼미션 체크
             if (ContextCompat.checkSelfPermission(view.getContext(),
@@ -81,16 +74,46 @@ public class ContractFragment extends Fragment {
             }
         });
 
-
         return view;
     }
+
+    private void getData() {
+        List<String> title = Arrays.asList("국화","난다");
+        List<String> listconent = Arrays.asList("이응","이응");
+
+        for(int i = 0; i <title.size(); i++){
+            list_member member = new list_member();
+            member.setSos_name(title.get(i));
+            member.setSos_num(listconent.get(i));
+
+            adapter.addItem(member);
+
+        }
+
+        adapter.notifyDataSetChanged();
+
+    }
+
+    private void init() {
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext());
+        list_sos_view.setLayoutManager(linearLayoutManager);
+        list_sos_view.hasFixedSize();
+        adapter = new list_sos_adapter();
+        list_sos_view.setAdapter(adapter);
+
+    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
+            //연락처 데이터 가져오기
             Cursor cursor = getContext().getContentResolver().query(data.getData(),
                     new String[]{ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME
                             , ContactsContract.CommonDataKinds.Phone.NUMBER}, null, null, null);
+
+
             cursor.moveToFirst();
             name = cursor.getString(0);
             num = cursor.getString(1);
@@ -100,6 +123,7 @@ public class ContractFragment extends Fragment {
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode,

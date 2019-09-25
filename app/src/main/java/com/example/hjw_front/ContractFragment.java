@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.hjw_front.utils.FragmentChanger;
 
@@ -34,21 +35,23 @@ import java.util.List;
 
 public class ContractFragment extends Fragment {
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 100;
-    private FloatingActionButton fab_contract;
     private String name;
     private String num;
     private RecyclerView list_sos_view;
     private list_sos_adapter adapter;
+    private List<String> list_name = new ArrayList<>();
+    private List<String> list_number = new ArrayList<>();
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+
         View view = inflater.inflate(R.layout.fragment_contract, container, false);
-        fab_contract = view.findViewById(R.id.fab_contract);
+        FloatingActionButton fab_contract = view.findViewById(R.id.fab_contract);
         list_sos_view = view.findViewById(R.id.sos_list_view);
 
         init();
-        getData();
 
 
         fab_contract.setOnClickListener(view1 -> {
@@ -71,6 +74,8 @@ public class ContractFragment extends Fragment {
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setData(ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
                 startActivityForResult(intent, 1);
+
+
             }
         });
 
@@ -78,20 +83,13 @@ public class ContractFragment extends Fragment {
     }
 
     private void getData() {
-        List<String> title = Arrays.asList("국화","난다");
-        List<String> listconent = Arrays.asList("이응","이응");
+        list_member member = new list_member();
+        member.setSos_name(list_name.get(list_name.size() - 1));
+        member.setSos_num(list_number.get(list_number.size() - 1));
+        adapter.addItem(member);
 
-        for(int i = 0; i <title.size(); i++){
-            list_member member = new list_member();
-            member.setSos_name(title.get(i));
-            member.setSos_num(listconent.get(i));
-
-            adapter.addItem(member);
-
-        }
 
         adapter.notifyDataSetChanged();
-
     }
 
     private void init() {
@@ -104,7 +102,6 @@ public class ContractFragment extends Fragment {
 
     }
 
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
@@ -113,13 +110,20 @@ public class ContractFragment extends Fragment {
                     new String[]{ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME
                             , ContactsContract.CommonDataKinds.Phone.NUMBER}, null, null, null);
 
-
             cursor.moveToFirst();
             name = cursor.getString(0);
             num = cursor.getString(1);
 
-            cursor.close();
+            if (!list_number.contains(num)) {
+                list_name.add(name);
+                list_number.add(num);
+                getData();
 
+            } else {
+                Toast.makeText(this.getContext(), "중복된 연락처가 있습니다.", Toast.LENGTH_LONG).show();
+            }
+
+            cursor.close();
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

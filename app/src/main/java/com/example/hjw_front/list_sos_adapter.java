@@ -9,10 +9,17 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
 public class list_sos_adapter extends RecyclerView.Adapter<list_sos_adapter.ItemViewHolder> {
 
-    private static ArrayList<list_member> list_members = new ArrayList<>();
+    private static List<Member> members;
+
+    public list_sos_adapter(List<Member> members) {
+        this.members = members;
+    }
 
     @NonNull
     @Override
@@ -28,19 +35,23 @@ public class list_sos_adapter extends RecyclerView.Adapter<list_sos_adapter.Item
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
         // 아이템을 한개, 한개 씩 보여주는 함수
-        holder.onBind(list_members.get(position));
-
+        holder.onBind(members.get(position));
+        holder.btn_rm_sos.setOnClickListener(view -> {
+            members.remove(position);
+//            notifyItemChanged(position);
+            notifyDataSetChanged();
+        });
     }
 
     @Override
     public int getItemCount() {
         // 뷰 아이템의 갯수;
-        return list_members.size();
+        return members.size();
     }
 
-    void addItem(list_member list_member) {
+    void addItem(Member Member) {
         //외부에서 아이템 추가시키는 함수
-        list_members.add(list_member);
+        members.add(Member);
     }
 
 
@@ -48,23 +59,17 @@ public class list_sos_adapter extends RecyclerView.Adapter<list_sos_adapter.Item
 
         private TextView list_name;
         private TextView list_number;
-
+        private Button btn_rm_sos;
         ItemViewHolder(View itemView) {
             super(itemView);
-            Button btn_rm_sos = itemView.findViewById(R.id.btn_list_rm);
+            btn_rm_sos = itemView.findViewById(R.id.btn_list_rm);
             list_name = itemView.findViewById(R.id.item_name);
             list_number = itemView.findViewById(R.id.item_num);
-            btn_rm_sos.setOnClickListener(view -> {
-                int pos = getAdapterPosition();
-                list_members.remove(pos);
-                notifyItemChanged(pos);
-            });
-
         }
 
-        public void onBind(list_member list_member) {
-            list_name.setText(list_member.getSos_name());
-            list_number.setText(list_member.getSos_num());
+        public void onBind(Member Member) {
+            list_name.setText(Member.getSos_name());
+            list_number.setText(Member.getSos_num());
         }
     }
 }

@@ -1,14 +1,9 @@
 package com.example.hjw_front;
 
 import android.Manifest;
-import android.app.Activity;
-import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
@@ -22,16 +17,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.hjw_front.utils.FragmentChanger;
-
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 public class ContractFragment extends Fragment {
@@ -40,9 +29,7 @@ public class ContractFragment extends Fragment {
     private String num;
     private RecyclerView list_sos_view;
     private list_sos_adapter adapter;
-    private static final List<String> list_name = new ArrayList<>();
-    private static final List<String> list_number = new ArrayList<>();
-
+    private List<Member> memberList = new LinkedList<>();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -84,22 +71,12 @@ public class ContractFragment extends Fragment {
         return view;
     }
 
-    private void getData() {
-        list_member member = new list_member();
-        member.setSos_name(list_name.get(list_name.size() - 1));
-        member.setSos_num(list_number.get(list_number.size() - 1));
-        adapter.addItem(member);
-
-
-        adapter.notifyDataSetChanged();
-    }
-
     private void init() {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext());
         list_sos_view.setLayoutManager(linearLayoutManager);
         list_sos_view.hasFixedSize();
-        adapter = new list_sos_adapter();
+        adapter = new list_sos_adapter(memberList);
         list_sos_view.setAdapter(adapter);
 
     }
@@ -113,18 +90,16 @@ public class ContractFragment extends Fragment {
                             , ContactsContract.CommonDataKinds.Phone.NUMBER}, null, null, null);
 
             cursor.moveToFirst();
+
             name = cursor.getString(0);
             num = cursor.getString(1);
-
-            if (!list_number.contains(num)) {
-                list_name.add(name);
-                list_number.add(num);
-                getData();
-
-            } else {
+            Member member = new Member(num,name);
+            if(memberList.contains(member)) {
                 Toast.makeText(this.getContext(), "중복된 연락처가 있습니다.", Toast.LENGTH_LONG).show();
+            } else {
+                memberList.add(member);
+                adapter.notifyDataSetChanged();
             }
-
             cursor.close();
         }
         super.onActivityResult(requestCode, resultCode, data);

@@ -23,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,8 +40,8 @@ public class ContractFragment extends Fragment {
     private String num;
     private RecyclerView list_sos_view;
     private list_sos_adapter adapter;
-    private List<String> list_name = new ArrayList<>();
-    private List<String> list_number = new ArrayList<>();
+    private static final List<String> list_name = new ArrayList<>();
+    private static final List<String> list_number = new ArrayList<>();
 
 
     @Override
@@ -50,6 +51,7 @@ public class ContractFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_contract, container, false);
         FloatingActionButton fab_contract = view.findViewById(R.id.fab_contract);
         list_sos_view = view.findViewById(R.id.sos_list_view);
+        Button btn_del_sos = view.findViewById(R.id.btn_list_rm);
 
         init();
 

@@ -2,12 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.hjw_front">
 
-    <uses-permission android:name="android.permission.INTERNET">
-    </uses-permission>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION">
-    </uses-permission>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!--    연락처 권한   -->
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <!--                  -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/hjw_logo"
@@ -16,7 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <meta-data android:name="com.kakao.sdk.AppKey" android:value="d948ab0542bbaef9eda02f65e48c7309"/>
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="d948ab0542bbaef9eda02f65e48c7309" />
 
         <activity
             android:name=".splash"

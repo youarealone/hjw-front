@@ -1,10 +1,12 @@
 package com.example.hjw_front;
 
+import android.Manifest;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -15,6 +17,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +45,8 @@ public class SosFragment extends Fragment {
     FragmentChanger fragmentChanger = null;
     final String[] list_sound = {"소리", "진동", "무음"};
     private int index;
+    private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 100;
+    private static final int PERMISSIONS_REQUEST_WRITE_CONTACTS = 101;
 
     @Override
     public void onAttach(Context context) {
@@ -53,13 +58,14 @@ public class SosFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_sos, container, false);
+
         final Switch SwitchSOS = view.findViewById(R.id.switch2);
         Button btn_sound = view.findViewById(R.id.btn_sound);
         ImageView imageView = view.findViewById(R.id.img_sound);
 
         index = 0;
 
-        view.findViewById(R.id.textView5).setOnClickListener(v -> fragmentChanger.changeFragment(new ContractFragment()));
+        view.findViewById(R.id.getContract).setOnClickListener(v -> fragmentChanger.changeFragment(new ContractFragment()));
 
         btn_sound.setOnClickListener(v -> {
             index = index != list_sound.length - 1 ? index + 1 : 0;
@@ -89,7 +95,7 @@ public class SosFragment extends Fragment {
         builder.setSmallIcon(R.mipmap.hjw_logo_round);
         builder.setLargeIcon(LargeIconSOS);
         builder.setContentTitle("SOS 메세지 기능 활성화");
-        builder.setContentText("누르시면 5분후 지정된 연락처로 메세지가 전송됩니다.");
+        builder.setContentText("누르시면 지정된 연락처로 메세지가 전송됩니다.");
 
         builder.setColor(Color.RED);
         // 사용자가 탭을 클릭하면 자동 제거
@@ -111,4 +117,6 @@ public class SosFragment extends Fragment {
         // Notification 제거
         NotificationManagerCompat.from(this.getContext()).cancel(1);
     }
-}
+
+
+    }

@@ -1,27 +1,21 @@
 package com.example.hjw_front;
 
-import android.Manifest;
-import android.app.NotificationManager;
-import android.content.Context;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.example.hjw_front.utils.FragmentChanger;
-import com.example.hjw_front.utils.KeyHashGetter;
 import com.example.hjw_front.utils.PermissionChecker;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
     FragmentChanger fragmentChanger = null;
+
+    //파이어베이스 데이터베이스 추가
+    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
 
     public MainActivity() {
         this.fragmentChanger = new FragmentChanger(getSupportFragmentManager());
@@ -64,6 +58,10 @@ public class MainActivity extends AppCompatActivity {
 
                 case R.id.menu_login:
                     fragmentChanger.changeFragment(new LoginFragment());
+                    break;
+
+                case R.id.menu_bookmark:
+                    fragmentChanger.changeFragment(new BookmarkFragment());
                     break;
 
                 default:

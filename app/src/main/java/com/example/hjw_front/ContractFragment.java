@@ -64,7 +64,6 @@ public class ContractFragment extends Fragment {
                 intent.setData(ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
                 startActivityForResult(intent, 1);
 
-
             }
         });
 
@@ -93,8 +92,8 @@ public class ContractFragment extends Fragment {
 
             name = cursor.getString(0);
             num = cursor.getString(1);
-            Member member = new Member(num,name);
-            if(memberList.contains(member)) {
+            Member member = new Member(num, name);
+            if (memberList.contains(member)) {
                 Toast.makeText(this.getContext(), "중복된 연락처가 있습니다.", Toast.LENGTH_LONG).show();
             } else {
                 memberList.add(member);

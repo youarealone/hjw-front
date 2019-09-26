@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "697292881412",
+    "firebase_url": "https://hjw-front.firebaseio.com",
+    "project_id": "hjw-front",
+    "storage_bucket": "hjw-front.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:697292881412:android:37b79be838224a686ebf51",
+        "android_client_info": {
+          "package_name": "com.example.hjw_front"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "697292881412-e2v35fcrqgbjljrb906sdnga2jsff1ph.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hjw_front",
+            "certificate_hash": "645c83f8565cd887d4010435b7bce52df167fc9e"
+          }
+        },
+        {
+          "client_id": "697292881412-75dhgmpraoph3n4dpn2inp498sq8i8bk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8zSniEIjm0lA4rTgvZ-ppWHhGIaPl67w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "697292881412-75dhgmpraoph3n4dpn2inp498sq8i8bk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -17,7 +17,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.LinkedList;
@@ -38,9 +37,8 @@ public class ContractFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_contract, container, false);
         FloatingActionButton fab_contract = view.findViewById(R.id.fab_contract);
         list_sos_view = view.findViewById(R.id.sos_list_view);
-        Button btn_del_sos = view.findViewById(R.id.btn_list_rm);
 
-        init();
+        init_sos();
 
 
         fab_contract.setOnClickListener(view1 -> {
@@ -70,7 +68,7 @@ public class ContractFragment extends Fragment {
         return view;
     }
 
-    private void init() {
+    private void init_sos() {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext());
         list_sos_view.setLayoutManager(linearLayoutManager);

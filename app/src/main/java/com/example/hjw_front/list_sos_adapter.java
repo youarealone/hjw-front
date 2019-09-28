@@ -8,10 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 public class list_sos_adapter extends RecyclerView.Adapter<list_sos_adapter.ItemViewHolder> {
 
@@ -49,10 +46,10 @@ public class list_sos_adapter extends RecyclerView.Adapter<list_sos_adapter.Item
         return members.size();
     }
 
-    void addItem(Member Member) {
-        //외부에서 아이템 추가시키는 함수
-        members.add(Member);
-    }
+//    void addItem(Member Member) {
+//        //외부에서 아이템 추가시키는 함수
+//        members.add(Member);
+//    }
 
 
     public class ItemViewHolder extends RecyclerView.ViewHolder {

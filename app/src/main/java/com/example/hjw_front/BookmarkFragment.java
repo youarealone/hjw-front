@@ -27,9 +27,8 @@ public class BookmarkFragment extends Fragment {
 
         bk_view = view.findViewById(R.id.bk_view);
         init_bk();
-
-        bk_memberList.add(member);
-        bk_adapter.notifyDataSetChanged();
+//        bk_memberList.add(member);
+//        bk_adapter.notifyDataSetChanged();
         return view;
 
     }
@@ -39,7 +38,7 @@ public class BookmarkFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext());
         bk_view.setLayoutManager(linearLayoutManager);
         bk_view.hasFixedSize();
-        bk_adapter = new BookmarkAdapter(bk_memberList);
+        bk_adapter = new BookmarkAdapter();
         bk_view.setAdapter(bk_adapter);
 
     }

@@ -28,7 +28,6 @@ public class BookmarkAdapter extends RecyclerView.Adapter<BookmarkAdapter.itemVi
     public BookmarkAdapter.itemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_bookmark, parent, false);
-        Log.d("!!!","나왓습니다");
         return new itemViewHolder(view);
     }
 

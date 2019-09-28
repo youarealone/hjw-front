@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.hjw_front.utils.FragmentChanger;
@@ -37,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
         ImageView logo = findViewById(R.id.iv_logo);
         logo.setOnClickListener(v -> fragmentChanger.changeFragment(new HomeFragment()));
 
+        Button btn_bk = findViewById(R.id.menu_bookmark);
+        btn_bk.setOnClickListener(view -> fragmentChanger.changeFragment(new BookmarkFragment()));
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottombar);
         bottomNavigationView.setOnNavigationItemSelectedListener(menuItem -> {
             switch (menuItem.getItemId()) {
@@ -60,9 +64,6 @@ public class MainActivity extends AppCompatActivity {
                     fragmentChanger.changeFragment(new LoginFragment());
                     break;
 
-                case R.id.menu_bookmark:
-                    fragmentChanger.changeFragment(new BookmarkFragment());
-                    break;
 
                 default:
                     break;

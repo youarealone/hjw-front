@@ -207,7 +207,7 @@ public class LocationFragment extends Fragment {
             //Network 위치제공자에 의한 위치변화
             //Network 위치는 Gps에 비해 정확도가 많이 떨어진다.
 
-            currentLocation = getCompleteAddressString(getContext(), latitude, longitude);
+            currentLocation = getCompleteAddressString(activity, latitude, longitude);
 
 //            txtCurrentMoney.setText("위치정보 : " + provider + "\n위도 : " + longitude + "\n경도 : " + latitude
 //                    + "\n고도 : " + altitude + "\n정확도 : "  + accuracy);

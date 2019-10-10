@@ -5,18 +5,22 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.hjw_front.utils.FragmentChanger;
 import com.example.hjw_front.utils.PermissionChecker;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
     FragmentChanger fragmentChanger = null;
 
     //파이어베이스 데이터베이스 추가
-    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    private FirebaseDatabase firebaseDatabase;
+    private FirebaseAuth firebaseAuth;
 
     public MainActivity() {
         this.fragmentChanger = new FragmentChanger(getSupportFragmentManager());
@@ -26,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
 
         PermissionChecker permissionChecker = new PermissionChecker(this);
         permissionChecker.permissionCheck();
@@ -72,5 +79,16 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+        if (currentUser != null) {
+            Log.d(getClass().getName(), currentUser.getUid());
+        } else {
+            Log.d(getClass().getName(), "currentUser is null");
+        }
     }
 }

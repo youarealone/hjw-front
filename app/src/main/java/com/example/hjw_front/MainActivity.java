@@ -1,5 +1,6 @@
 package com.example.hjw_front;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
@@ -89,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
             Log.d(getClass().getName(), currentUser.getUid());
         } else {
             Log.d(getClass().getName(), "currentUser is null");
+            Intent intent = new Intent(getApplicationContext(), GoogleLoginActivity.class);
+            startActivityForResult(intent, 1001);
         }
     }
 }

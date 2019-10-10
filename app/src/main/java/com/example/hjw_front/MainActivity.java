@@ -6,16 +6,16 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.hjw_front.utils.FragmentChanger;
-import com.example.hjw_front.utils.KeyHashGetter;
 import com.example.hjw_front.utils.PermissionChecker;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
+
+import static com.example.hjw_front.utils.RequestCode.RC_GOOGLE_LOGIN;
 
 public class MainActivity extends AppCompatActivity {
     FragmentChanger fragmentChanger = null;
@@ -86,13 +86,24 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
+
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-        if (currentUser != null) {
-            Log.d(getClass().getName(), currentUser.getUid());
-        } else {
-            Log.d(getClass().getName(), "currentUser is null");
+        if (currentUser == null) {
             Intent intent = new Intent(getApplicationContext(), GoogleLoginActivity.class);
-            startActivityForResult(intent, 1001);
+            startActivityForResult(intent, RC_GOOGLE_LOGIN);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RC_GOOGLE_LOGIN) {
+            FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+            if (currentUser == null) {
+                Intent intent = new Intent(getApplicationContext(), GoogleLoginActivity.class);
+                startActivityForResult(intent, RC_GOOGLE_LOGIN);
+            }
         }
     }
 }

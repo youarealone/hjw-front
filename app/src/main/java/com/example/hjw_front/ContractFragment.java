@@ -14,14 +14,21 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.hjw_front.repositories.SOSRepository;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -32,8 +39,9 @@ public class ContractFragment extends Fragment {
     private String num;
     private RecyclerView list_sos_view;
     private list_sos_adapter adapter;
-    private List<Member> memberList = new LinkedList<>();
+    private List<SosContract> sosContractList = new LinkedList<>();
     private FirebaseUser currentUser;
+    private SOSRepository sosRepository;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -46,6 +54,33 @@ public class ContractFragment extends Fragment {
 
         init_sos();
 
+        sosRepository.getReference().addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@javax.annotation.Nullable QuerySnapshot snapshot, @javax.annotation.Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    e.printStackTrace();
+                    return;
+                }
+
+                if (snapshot != null && !snapshot.isEmpty()) {
+                    sosRepository.findByUID(currentUser.getUid())
+                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful() && task.getResult() != null) {
+                                        for (QueryDocumentSnapshot document: task.getResult()) {
+                                            SosContract sosContract = document.toObject(SosContract.class);
+                                            if (!sosContractList.contains(sosContract)) {
+                                                sosContractList.add(sosContract);
+                                            }
+                                            adapter.notifyDataSetChanged();
+                                        }
+                                    }
+                                }
+                            });
+                }
+            }
+        });
 
         fab_contract.setOnClickListener(view1 -> {
             // 연락처 퍼미션 체크
@@ -79,8 +114,9 @@ public class ContractFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext());
         list_sos_view.setLayoutManager(linearLayoutManager);
         list_sos_view.hasFixedSize();
-        adapter = new list_sos_adapter(memberList);
+        adapter = new list_sos_adapter(sosContractList);
         list_sos_view.setAdapter(adapter);
+        sosRepository = SOSRepository.getInstance();
 
     }
 
@@ -96,15 +132,13 @@ public class ContractFragment extends Fragment {
 
             name = cursor.getString(0);
             num = cursor.getString(1);
-            Member member = new Member(num, name);
+            SosContract sosContract = new SosContract(currentUser.getUid(), num, name);
 
-            SOSRepository sosRepository = SOSRepository.getInstance();
             sosRepository.create(currentUser.getUid(), name, num);
 
-            if (memberList.contains(member)) {
+            if (sosContractList.contains(sosContract)) {
                 Toast.makeText(this.getContext(), "중복된 연락처가 있습니다.", Toast.LENGTH_LONG).show();
             } else {
-                memberList.add(member);
                 adapter.notifyDataSetChanged();
             }
             cursor.close();

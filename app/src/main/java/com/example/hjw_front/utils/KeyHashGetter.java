@@ -9,6 +9,12 @@ import android.util.Log;
 
 import java.security.MessageDigest;
 
+/*
+[참고] MD5, SHA1, SHA256 키 알아보기
+$ keytool -list -v -alias androiddebugkey -keystore %USERPROFILE%\.android\debug.keystore
+키 저장소 비밀번호 : (공백)
+ */
+
 public class KeyHashGetter {
     public static void printKeyHash(Activity activity) {
         try {

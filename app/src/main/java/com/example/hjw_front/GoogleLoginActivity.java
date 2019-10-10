@@ -12,6 +12,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,7 +29,6 @@ public class GoogleLoginActivity extends AppCompatActivity{
 
     private static final String TAG = "[구글로그인]";
     private FirebaseAuth mAuth;
-    private GoogleApiClient mGoogleApiClient;
     private GoogleSignInClient mGoogleSignInClient;
 
     @Override
@@ -43,7 +43,9 @@ public class GoogleLoginActivity extends AppCompatActivity{
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        findViewById(R.id.btn_google_login).setOnClickListener(new View.OnClickListener() {
+        SignInButton signInButton = findViewById(R.id.btn_google_login);
+        signInButton.setColorScheme(SignInButton.COLOR_AUTO);
+        signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signIn();

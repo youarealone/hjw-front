@@ -19,6 +19,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.hjw_front.repositories.SOSRepository;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -29,6 +33,7 @@ public class ContractFragment extends Fragment {
     private RecyclerView list_sos_view;
     private list_sos_adapter adapter;
     private List<Member> memberList = new LinkedList<>();
+    private FirebaseUser currentUser;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -37,6 +42,7 @@ public class ContractFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_contract, container, false);
         FloatingActionButton fab_contract = view.findViewById(R.id.fab_contract);
         list_sos_view = view.findViewById(R.id.sos_list_view);
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         init_sos();
 
@@ -91,6 +97,10 @@ public class ContractFragment extends Fragment {
             name = cursor.getString(0);
             num = cursor.getString(1);
             Member member = new Member(num, name);
+
+            SOSRepository sosRepository = SOSRepository.getInstance();
+            sosRepository.create(currentUser.getUid(), name, num);
+
             if (memberList.contains(member)) {
                 Toast.makeText(this.getContext(), "중복된 연락처가 있습니다.", Toast.LENGTH_LONG).show();
             } else {

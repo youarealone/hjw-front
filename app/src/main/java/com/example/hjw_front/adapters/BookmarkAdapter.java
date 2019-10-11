@@ -1,8 +1,7 @@
-package com.example.hjw_front;
+package com.example.hjw_front.adapters;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,13 +9,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.hjw_front.R;
+import com.example.hjw_front.vo.BookmarkVO;
+
 import java.util.List;
 
 public class BookmarkAdapter extends RecyclerView.Adapter<BookmarkAdapter.itemViewHolder> {
 
-    private static List<BookmarkMember> bk_members;
+    private static List<BookmarkVO> bk_members;
 
-//    public BookmarkAdapter(List<BookmarkMember> bk_members) {
+//    public BookmarkAdapter(List<BookmarkVO> bk_members) {
 //        this.bk_members = bk_members;
 //    }
 
@@ -61,14 +63,14 @@ public class BookmarkAdapter extends RecyclerView.Adapter<BookmarkAdapter.itemVi
 //            del_bk.setOnClickListener(new View.OnClickListener() {
 //                @Override
 //                public void onClick(View view) {
-//                    BookmarkMember member =new BookmarkMember();
+//                    BookmarkVO member =new BookmarkVO();
 //                    bk_members.add(member);
 //                }
 //            });
 
         }
 
-        public void onBind(BookmarkMember member){
+        public void onBind(BookmarkVO member){
 
         }
     }

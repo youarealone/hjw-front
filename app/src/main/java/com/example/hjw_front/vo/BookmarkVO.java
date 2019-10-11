@@ -1,6 +1,6 @@
-package com.example.hjw_front;
+package com.example.hjw_front.vo;
 
-public class BookmarkMember {
+public class BookmarkVO {
     private String name;
     private int discount;
     private int price;

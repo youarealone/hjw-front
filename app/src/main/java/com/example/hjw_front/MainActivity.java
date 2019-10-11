@@ -7,8 +7,13 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.Button;
-import android.widget.ImageView;
 
+import com.example.hjw_front.fragments.BookmarkFragment;
+import com.example.hjw_front.fragments.DiscountFragment;
+import com.example.hjw_front.fragments.HomeFragment;
+import com.example.hjw_front.fragments.LocationFragment;
+import com.example.hjw_front.fragments.ScheduleFragment;
+import com.example.hjw_front.fragments.SosFragment;
 import com.example.hjw_front.utils.FragmentChanger;
 import com.example.hjw_front.utils.PermissionChecker;
 import com.google.firebase.auth.FirebaseAuth;

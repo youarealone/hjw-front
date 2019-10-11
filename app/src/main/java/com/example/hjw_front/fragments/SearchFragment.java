@@ -1,4 +1,4 @@
-package com.example.hjw_front;
+package com.example.hjw_front.fragments;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.hjw_front.R;
 
 import org.apmem.tools.layouts.FlowLayout;
 

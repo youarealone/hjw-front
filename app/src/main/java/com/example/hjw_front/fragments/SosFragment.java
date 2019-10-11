@@ -1,12 +1,9 @@
-package com.example.hjw_front;
+package com.example.hjw_front.fragments;
 
-import android.Manifest;
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -17,34 +14,25 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
-import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
-import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.hjw_front.R;
 import com.example.hjw_front.utils.FragmentChanger;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-
-import static android.support.v4.content.ContextCompat.getSystemService;
 import static com.example.hjw_front.R.drawable.speaker;
 import static com.example.hjw_front.R.drawable.speaker_mute;
 import static com.example.hjw_front.R.drawable.speaker_vibration;
 
 public class SosFragment extends Fragment {
     FragmentChanger fragmentChanger = null;
-    final String[] list_sound = {"소리", "진동", "무음"};
+    final String[] listSound = {"소리", "진동", "무음"};
     private int index;
+    private int soundTemp;
     private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 100;
     private static final int PERMISSIONS_REQUEST_WRITE_CONTACTS = 101;
 
@@ -60,23 +48,26 @@ public class SosFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_sos, container, false);
 
         final Switch SwitchSOS = view.findViewById(R.id.switch2);
-        Button btn_sound = view.findViewById(R.id.btn_sound);
+        Button btnSound = view.findViewById(R.id.btn_sound);
         ImageView imageView = view.findViewById(R.id.img_sound);
 
         index = 0;
-
+        soundTemp = 0;
         view.findViewById(R.id.getContract).setOnClickListener(v -> fragmentChanger.changeFragment(new ContractFragment()));
 
-        btn_sound.setOnClickListener(v -> {
-            index = index != list_sound.length - 1 ? index + 1 : 0;
+        btnSound.setOnClickListener(v -> {
+            index = index != listSound.length - 1 ? index + 1 : 0;
             if (index == 0) {
                 imageView.setImageResource(speaker);
+                soundTemp = 0;
             } else if (index == 1) {
                 imageView.setImageResource(speaker_vibration);
+                soundTemp = 1;
             } else if (index == 2) {
                 imageView.setImageResource(speaker_mute);
+                soundTemp = 2;
             }
-            btn_sound.setText(list_sound[index]);
+            btnSound.setText(listSound[index]);
         });
 
         SwitchSOS.setOnCheckedChangeListener((compoundButton, b) -> {
@@ -96,6 +87,20 @@ public class SosFragment extends Fragment {
         builder.setLargeIcon(LargeIconSOS);
         builder.setContentTitle("SOS 메세지 기능 활성화");
         builder.setContentText("누르시면 지정된 연락처로 메세지가 전송됩니다.");
+        switch (soundTemp) {
+            case 1:
+                builder.setDefaults(Notification.DEFAULT_SOUND);
+                break;
+            case 2:
+                builder.setDefaults(Notification.DEFAULT_VIBRATE);
+                break;
+            case 3:
+                builder.setDefaults(Notification.DEFAULT_LIGHTS);
+                break;
+//            default:
+//                builder.setDefaults(Notification.DEFAULT_SOUND);
+//                break;
+        }
 
         builder.setColor(Color.RED);
         // 사용자가 탭을 클릭하면 자동 제거
@@ -112,11 +117,10 @@ public class SosFragment extends Fragment {
         notificationManager.notify(1, builder.build());
     }
 
-
     private void removeNotification() {
         // Notification 제거
         NotificationManagerCompat.from(this.getContext()).cancel(1);
     }
 
 
-    }
+}

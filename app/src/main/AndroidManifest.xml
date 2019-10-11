@@ -15,14 +15,14 @@
         android:roundIcon="@mipmap/hjw_logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".BookmarkFragment"></activity>
+        <activity android:name=".fragments.BookmarkFragment"></activity>
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="d948ab0542bbaef9eda02f65e48c7309" />
 
         <activity
-            android:name=".splash"
+            android:name=".SplashActivity"
             android:theme="@style/splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

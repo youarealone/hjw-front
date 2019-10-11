@@ -1,4 +1,4 @@
-package com.example.hjw_front;
+package com.example.hjw_front.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,18 +10,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.hjw_front.R;
+import com.example.hjw_front.adapters.BookmarkAdapter;
+import com.example.hjw_front.vo.BookmarkVO;
+
 import java.util.LinkedList;
 import java.util.List;
 
 public class BookmarkFragment extends Fragment {
     private RecyclerView bk_view;
     private BookmarkAdapter bk_adapter;
-    private List<BookmarkMember> bk_memberList = new LinkedList<>();
+    private List<BookmarkVO> bk_memberList = new LinkedList<>();
 
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        BookmarkMember member = new BookmarkMember();
+        BookmarkVO member = new BookmarkVO();
 
         View view = inflater.inflate(R.layout.bookmark_fragment, container, false);
 

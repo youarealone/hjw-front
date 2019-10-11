@@ -1,4 +1,4 @@
-package com.example.hjw_front;
+package com.example.hjw_front.fragments;
 
 import android.Manifest;
 import android.content.Intent;
@@ -19,6 +19,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.hjw_front.R;
+import com.example.hjw_front.adapters.SosAdapter;
 import com.example.hjw_front.repositories.SOSRepository;
 import com.example.hjw_front.vo.SosContractVO;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -36,7 +38,7 @@ public class ContractFragment extends Fragment {
     private String name;
     private String num;
     private RecyclerView list_sos_view;
-    private list_sos_adapter adapter;
+    private SosAdapter adapter;
     private List<SosContractVO> sosContractList = new LinkedList<>();
     private FirebaseUser currentUser;
     private SOSRepository sosRepository;
@@ -85,7 +87,7 @@ public class ContractFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext());
         list_sos_view.setLayoutManager(linearLayoutManager);
         list_sos_view.hasFixedSize();
-        adapter = new list_sos_adapter(sosContractList);
+        adapter = new SosAdapter(sosContractList);
         list_sos_view.setAdapter(adapter);
         sosRepository = SOSRepository.getInstance();
 

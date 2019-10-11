@@ -1,4 +1,4 @@
-package com.example.hjw_front;
+package com.example.hjw_front.fragments;
 
 import android.app.Activity;
 import android.content.Context;
@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.hjw_front.R;
 import com.example.hjw_front.utils.PermissionChecker;
 
 import net.daum.mf.map.api.MapPOIItem;

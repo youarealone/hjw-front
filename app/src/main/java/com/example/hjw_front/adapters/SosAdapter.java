@@ -1,4 +1,4 @@
-package com.example.hjw_front;
+package com.example.hjw_front.adapters;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -8,17 +8,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.hjw_front.R;
 import com.example.hjw_front.repositories.SOSRepository;
 import com.example.hjw_front.vo.SosContractVO;
 
 import java.util.List;
 
-public class list_sos_adapter extends RecyclerView.Adapter<list_sos_adapter.ItemViewHolder> {
+public class SosAdapter extends RecyclerView.Adapter<SosAdapter.ItemViewHolder> {
 
     private static List<SosContractVO> sosContracts;
     private SOSRepository sosRepository;
 
-    public list_sos_adapter(List<SosContractVO> sosContracts) {
+    public SosAdapter(List<SosContractVO> sosContracts) {
         this.sosContracts = sosContracts;
         this.sosRepository = SOSRepository.getInstance();
     }

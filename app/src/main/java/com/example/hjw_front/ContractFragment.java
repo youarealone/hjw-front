@@ -14,19 +14,17 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.hjw_front.repositories.SOSRepository;
+import com.example.hjw_front.vo.SosContractVO;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -39,7 +37,7 @@ public class ContractFragment extends Fragment {
     private String num;
     private RecyclerView list_sos_view;
     private list_sos_adapter adapter;
-    private List<SosContract> sosContractList = new LinkedList<>();
+    private List<SosContractVO> sosContractList = new LinkedList<>();
     private FirebaseUser currentUser;
     private SOSRepository sosRepository;
 
@@ -105,11 +103,11 @@ public class ContractFragment extends Fragment {
 
             name = cursor.getString(0);
             num = cursor.getString(1);
-            SosContract sosContract = new SosContract(null, currentUser.getUid(), num, name);
+            SosContractVO sosContractVO = new SosContractVO(null, currentUser.getUid(), num, name);
 
             sosRepository.create(currentUser.getUid(), name, num);
 
-            if (sosContractList.contains(sosContract)) {
+            if (sosContractList.contains(sosContractVO)) {
                 Toast.makeText(this.getContext(), "중복된 연락처가 있습니다.", Toast.LENGTH_LONG).show();
             } else {
                 listMyContract();
@@ -149,10 +147,10 @@ public class ContractFragment extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful() && task.getResult() != null) {
                             for (QueryDocumentSnapshot document: task.getResult()) {
-                                SosContract sosContract = document.toObject(SosContract.class);
-                                sosContract.setId(document.getId());
-                                if (!sosContractList.contains(sosContract)) {
-                                    sosContractList.add(sosContract);
+                                SosContractVO sosContractVO = document.toObject(SosContractVO.class);
+                                sosContractVO.setId(document.getId());
+                                if (!sosContractList.contains(sosContractVO)) {
+                                    sosContractList.add(sosContractVO);
                                 }
                                 adapter.notifyDataSetChanged();
                             }

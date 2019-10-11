@@ -19,6 +19,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.hjw_front.repositories.SOSRepository;
+import com.example.hjw_front.vo.SosContractVO;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -28,7 +37,9 @@ public class ContractFragment extends Fragment {
     private String num;
     private RecyclerView list_sos_view;
     private list_sos_adapter adapter;
-    private List<Member> memberList = new LinkedList<>();
+    private List<SosContractVO> sosContractList = new LinkedList<>();
+    private FirebaseUser currentUser;
+    private SOSRepository sosRepository;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -37,9 +48,10 @@ public class ContractFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_contract, container, false);
         FloatingActionButton fab_contract = view.findViewById(R.id.fab_contract);
         list_sos_view = view.findViewById(R.id.sos_list_view);
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         init_sos();
-
+        listMyContract();
 
         fab_contract.setOnClickListener(view1 -> {
             // 연락처 퍼미션 체크
@@ -73,8 +85,9 @@ public class ContractFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext());
         list_sos_view.setLayoutManager(linearLayoutManager);
         list_sos_view.hasFixedSize();
-        adapter = new list_sos_adapter(memberList);
+        adapter = new list_sos_adapter(sosContractList);
         list_sos_view.setAdapter(adapter);
+        sosRepository = SOSRepository.getInstance();
 
     }
 
@@ -90,12 +103,14 @@ public class ContractFragment extends Fragment {
 
             name = cursor.getString(0);
             num = cursor.getString(1);
-            Member member = new Member(num, name);
-            if (memberList.contains(member)) {
+            SosContractVO sosContractVO = new SosContractVO(null, currentUser.getUid(), num, name);
+
+            sosRepository.create(currentUser.getUid(), name, num);
+
+            if (sosContractList.contains(sosContractVO)) {
                 Toast.makeText(this.getContext(), "중복된 연락처가 있습니다.", Toast.LENGTH_LONG).show();
             } else {
-                memberList.add(member);
-                adapter.notifyDataSetChanged();
+                listMyContract();
             }
             cursor.close();
         }
@@ -123,5 +138,24 @@ public class ContractFragment extends Fragment {
             // other 'case' lines to check for other
             // permissions this app might request.
         }
+    }
+
+    private void listMyContract() {
+        sosRepository.findByUID(currentUser.getUid())
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful() && task.getResult() != null) {
+                            for (QueryDocumentSnapshot document: task.getResult()) {
+                                SosContractVO sosContractVO = document.toObject(SosContractVO.class);
+                                sosContractVO.setId(document.getId());
+                                if (!sosContractList.contains(sosContractVO)) {
+                                    sosContractList.add(sosContractVO);
+                                }
+                                adapter.notifyDataSetChanged();
+                            }
+                        }
+                    }
+                });
     }
 }

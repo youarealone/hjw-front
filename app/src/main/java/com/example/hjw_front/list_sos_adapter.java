@@ -8,14 +8,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.hjw_front.repositories.SOSRepository;
+import com.example.hjw_front.vo.SosContractVO;
+
 import java.util.List;
 
 public class list_sos_adapter extends RecyclerView.Adapter<list_sos_adapter.ItemViewHolder> {
 
-    private static List<Member> members;
+    private static List<SosContractVO> sosContracts;
+    private SOSRepository sosRepository;
 
-    public list_sos_adapter(List<Member> members) {
-        this.members = members;
+    public list_sos_adapter(List<SosContractVO> sosContracts) {
+        this.sosContracts = sosContracts;
+        this.sosRepository = SOSRepository.getInstance();
     }
 
     @NonNull
@@ -32,9 +37,11 @@ public class list_sos_adapter extends RecyclerView.Adapter<list_sos_adapter.Item
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
         // 아이템을 한개, 한개 씩 보여주는 함수
-        holder.onBind(members.get(position));
+        SosContractVO sosContractVO = sosContracts.get(position);
+        holder.onBind(sosContractVO);
         holder.btn_rm_sos.setOnClickListener(view -> {
-            members.remove(position);
+            sosRepository.deleteById(sosContractVO.getId());
+            sosContracts.remove(position);
 //            notifyItemChanged(position);
             notifyDataSetChanged();
         });
@@ -43,12 +50,12 @@ public class list_sos_adapter extends RecyclerView.Adapter<list_sos_adapter.Item
     @Override
     public int getItemCount() {
         // 뷰 아이템의 갯수;
-        return members.size();
+        return sosContracts.size();
     }
 
-//    void addItem(Member Member) {
+//    void addItem(SosContractVO SosContractVO) {
 //        //외부에서 아이템 추가시키는 함수
-//        members.add(Member);
+//        sosContracts.add(SosContractVO);
 //    }
 
 
@@ -64,9 +71,9 @@ public class list_sos_adapter extends RecyclerView.Adapter<list_sos_adapter.Item
             list_number = itemView.findViewById(R.id.item_num);
         }
 
-        public void onBind(Member Member) {
-            list_name.setText(Member.getSos_name());
-            list_number.setText(Member.getSos_num());
+        public void onBind(SosContractVO SosContractVO) {
+            list_name.setText(SosContractVO.getName());
+            list_number.setText(SosContractVO.getContract());
         }
     }
 }

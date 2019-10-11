@@ -13,6 +13,13 @@
         android:icon="@drawable/ic_pointer"
         app:showAsAction="ifRoom"/>
 
+
+    <item
+        android:id="@+id/menu_home"
+        android:title="@string/menu_home"
+        android:icon="@drawable/ic_home"
+        app:showAsAction="ifRoom"/>
+
     <item
         android:id="@+id/menu_schedule"
         android:title="@string/menu_schedule"
@@ -25,9 +32,4 @@
         android:icon="@drawable/ic_contact"
         app:showAsAction="ifRoom"/>
 
-    <item
-        android:id="@+id/menu_login"
-        android:title="@string/menu_login"
-        android:icon="@drawable/ic_account"
-        app:showAsAction="ifRoom"/>
 </menu>

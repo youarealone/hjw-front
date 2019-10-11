@@ -44,9 +44,6 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         fragmentChanger.changeFragment(new HomeFragment());
 
-        ImageView logo = findViewById(R.id.iv_logo);
-        logo.setOnClickListener(v -> fragmentChanger.changeFragment(new HomeFragment()));
-
         Button btn_bk = findViewById(R.id.menu_bookmark);
         btn_bk.setOnClickListener(view -> fragmentChanger.changeFragment(new BookmarkFragment()));
 
@@ -61,16 +58,16 @@ public class MainActivity extends AppCompatActivity {
                     fragmentChanger.changeFragment(new LocationFragment());
                     break;
 
+                case R.id.menu_home:
+                    fragmentChanger.changeFragment(new HomeFragment());
+                    break;
+
                 case R.id.menu_schedule:
                     fragmentChanger.changeFragment(new ScheduleFragment());
                     break;
 
                 case R.id.menu_sos:
                     fragmentChanger.changeFragment(new SosFragment());
-                    break;
-
-                case R.id.menu_login:
-                    fragmentChanger.changeFragment(new LoginFragment());
                     break;
 
 

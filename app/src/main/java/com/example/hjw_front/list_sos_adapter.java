@@ -8,14 +8,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.hjw_front.repositories.SOSRepository;
+
 import java.util.List;
 
 public class list_sos_adapter extends RecyclerView.Adapter<list_sos_adapter.ItemViewHolder> {
 
     private static List<SosContract> sosContracts;
+    private SOSRepository sosRepository;
 
     public list_sos_adapter(List<SosContract> sosContracts) {
         this.sosContracts = sosContracts;
+        this.sosRepository = SOSRepository.getInstance();
     }
 
     @NonNull
@@ -32,8 +36,10 @@ public class list_sos_adapter extends RecyclerView.Adapter<list_sos_adapter.Item
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
         // 아이템을 한개, 한개 씩 보여주는 함수
-        holder.onBind(sosContracts.get(position));
+        SosContract sosContract = sosContracts.get(position);
+        holder.onBind(sosContract);
         holder.btn_rm_sos.setOnClickListener(view -> {
+            sosRepository.deleteById(sosContract.getId());
             sosContracts.remove(position);
 //            notifyItemChanged(position);
             notifyDataSetChanged();

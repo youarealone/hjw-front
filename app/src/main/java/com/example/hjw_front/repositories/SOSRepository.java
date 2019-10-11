@@ -23,10 +23,6 @@ public class SOSRepository {
         return instance;
     }
 
-    public CollectionReference getReference() {
-        return reference;
-    }
-
     public void create(String uid, String name, String contract) {
         Map<String, Object> sos = new HashMap<>();
         sos.put("uid", uid);
@@ -38,5 +34,9 @@ public class SOSRepository {
 
     public Task<QuerySnapshot> findByUID(String uid) {
         return reference.whereEqualTo("uid", uid).get();
+    }
+
+    public void deleteById(String id) {
+        reference.document(id).delete();
     }
 }

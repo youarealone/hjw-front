@@ -105,7 +105,7 @@ public class ContractFragment extends Fragment {
 
             name = cursor.getString(0);
             num = cursor.getString(1);
-            SosContract sosContract = new SosContract(currentUser.getUid(), num, name);
+            SosContract sosContract = new SosContract(null, currentUser.getUid(), num, name);
 
             sosRepository.create(currentUser.getUid(), name, num);
 
@@ -150,6 +150,7 @@ public class ContractFragment extends Fragment {
                         if (task.isSuccessful() && task.getResult() != null) {
                             for (QueryDocumentSnapshot document: task.getResult()) {
                                 SosContract sosContract = document.toObject(SosContract.class);
+                                sosContract.setId(document.getId());
                                 if (!sosContractList.contains(sosContract)) {
                                     sosContractList.add(sosContract);
                                 }

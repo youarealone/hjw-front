@@ -3,6 +3,7 @@ package com.example.hjw_front;
 import android.support.annotation.Nullable;
 
 class SosContract {
+    private String id;
     private String uid;
     private String contract;
     private String name;
@@ -10,10 +11,19 @@ class SosContract {
     public SosContract() {
     }
 
-    public SosContract(String uid, String contract, String name) {
+    public SosContract(String id, String uid, String contract, String name) {
+        this.id = id;
         this.uid = uid;
         this.contract = contract;
         this.name = name;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getUid() {
@@ -52,5 +62,15 @@ class SosContract {
     @Override
     public int hashCode() {
         return 31 * contract.length() + 17 * name.length();
+    }
+
+    @Override
+    public String toString() {
+        return "SosContract{" +
+                "id='" + id + '\'' +
+                ", uid='" + uid + '\'' +
+                ", contract='" + contract + '\'' +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

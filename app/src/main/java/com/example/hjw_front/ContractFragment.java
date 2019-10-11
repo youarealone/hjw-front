@@ -53,34 +53,7 @@ public class ContractFragment extends Fragment {
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         init_sos();
-
-        sosRepository.getReference().addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@javax.annotation.Nullable QuerySnapshot snapshot, @javax.annotation.Nullable FirebaseFirestoreException e) {
-                if (e != null) {
-                    e.printStackTrace();
-                    return;
-                }
-
-                if (snapshot != null && !snapshot.isEmpty()) {
-                    sosRepository.findByUID(currentUser.getUid())
-                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                    if (task.isSuccessful() && task.getResult() != null) {
-                                        for (QueryDocumentSnapshot document: task.getResult()) {
-                                            SosContract sosContract = document.toObject(SosContract.class);
-                                            if (!sosContractList.contains(sosContract)) {
-                                                sosContractList.add(sosContract);
-                                            }
-                                            adapter.notifyDataSetChanged();
-                                        }
-                                    }
-                                }
-                            });
-                }
-            }
-        });
+        listMyContract();
 
         fab_contract.setOnClickListener(view1 -> {
             // 연락처 퍼미션 체크
@@ -139,7 +112,7 @@ public class ContractFragment extends Fragment {
             if (sosContractList.contains(sosContract)) {
                 Toast.makeText(this.getContext(), "중복된 연락처가 있습니다.", Toast.LENGTH_LONG).show();
             } else {
-                adapter.notifyDataSetChanged();
+                listMyContract();
             }
             cursor.close();
         }
@@ -167,5 +140,23 @@ public class ContractFragment extends Fragment {
             // other 'case' lines to check for other
             // permissions this app might request.
         }
+    }
+
+    private void listMyContract() {
+        sosRepository.findByUID(currentUser.getUid())
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful() && task.getResult() != null) {
+                            for (QueryDocumentSnapshot document: task.getResult()) {
+                                SosContract sosContract = document.toObject(SosContract.class);
+                                if (!sosContractList.contains(sosContract)) {
+                                    sosContractList.add(sosContract);
+                                }
+                                adapter.notifyDataSetChanged();
+                            }
+                        }
+                    }
+                });
     }
 }

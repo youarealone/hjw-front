@@ -114,9 +114,6 @@ public class AddScheduleDialogFragment extends DialogFragment implements View.On
     private void updateLabel() {
         String myFormat = "yyyy/MM/dd";    // 출력형식   2018/11/28
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA);
-//        sYear = myCalendar.YEAR;
-//        sMonth = myCalendar.MONTH;
-//        sDay = myCalendar.DATE;
 
         TextView tvDate = view.findViewById(R.id.tv_schedule_date);
         tvDate.setText(sdf.format(myCalendar.getTime()));

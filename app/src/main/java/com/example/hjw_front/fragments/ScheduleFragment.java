@@ -49,7 +49,7 @@ public class ScheduleFragment extends Fragment {
     private ArrayList<ScheduleVO> makeList() {
         ArrayList<ScheduleVO> list = new ArrayList<ScheduleVO>();
         for (int i = 0; i < 4; i++) {
-            ScheduleVO vo = new ScheduleVO(i, "카멜리아힐"+i, "5/12 1"+i+":00");
+            ScheduleVO vo = new ScheduleVO(i, 2019, 1+i, i, 10, 30, "성산일출봉"+i);
             list.add(vo);
         }
         return list;

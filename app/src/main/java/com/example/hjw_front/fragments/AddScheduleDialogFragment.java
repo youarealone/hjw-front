@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -22,12 +23,19 @@ import java.util.Locale;
 
 public class AddScheduleDialogFragment extends DialogFragment implements View.OnClickListener {
     public static final String TAG = "add_schedule";
+    private int sYear, sMonth, sDay;
+    private int sHour, sMinutes;
+    private String content;
 
     Calendar myCalendar = Calendar.getInstance();
 
     DatePickerDialog.OnDateSetListener myDatePicker = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+            sYear = year;
+            sMonth = month + 1;
+            sDay = dayOfMonth;
+
             myCalendar.set(Calendar.YEAR, year);
             myCalendar.set(Calendar.MONTH, month);
             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
@@ -65,6 +73,8 @@ public class AddScheduleDialogFragment extends DialogFragment implements View.On
                 mTimePicker = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        sHour = selectedHour;
+                        sMinutes = selectedMinute;
                         String state = "AM";
                         // 선택한 시간이 12를 넘을경우 "PM"으로 변경 및 -12시간하여 출력 (ex : PM 6시 30분)
                         if (selectedHour > 12) {
@@ -87,7 +97,8 @@ public class AddScheduleDialogFragment extends DialogFragment implements View.On
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_add_schedule:
-                Toast.makeText(getContext(), "애드", Toast.LENGTH_LONG).show();
+                content = ((EditText) view.findViewById(R.id.et_schedule_content)).getText().toString();
+                Toast.makeText(getContext(), sYear+ " " + sMonth + " " + sDay + " " + sHour + " " + sMinutes + " " + content, Toast.LENGTH_LONG).show();
                 break;
 
             case R.id.btn_dismiss_schedule_dialog:
@@ -103,6 +114,9 @@ public class AddScheduleDialogFragment extends DialogFragment implements View.On
     private void updateLabel() {
         String myFormat = "yyyy/MM/dd";    // 출력형식   2018/11/28
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA);
+//        sYear = myCalendar.YEAR;
+//        sMonth = myCalendar.MONTH;
+//        sDay = myCalendar.DATE;
 
         TextView tvDate = view.findViewById(R.id.tv_schedule_date);
         tvDate.setText(sdf.format(myCalendar.getTime()));

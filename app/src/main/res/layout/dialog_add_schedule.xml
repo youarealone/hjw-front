@@ -48,12 +48,12 @@
         android:textSize="18dp"/>
 
     <EditText
+        android:id="@+id/et_schedule_content"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginBottom="20dp"
         android:hint="일정을 입력해주세요."
-        android:textSize="16dp"
-        />
+        android:textSize="16dp"/>
 
 
     <View

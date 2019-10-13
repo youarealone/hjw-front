@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
+    android:background="@color/gray0"
     android:orientation="vertical">
 
     <TextView
@@ -12,16 +13,40 @@
         android:gravity="top"
         android:text="일정 추가하기"
         android:textSize="24dp"
+        android:textColor="@color/gray9"
         android:textStyle="bold"/>
 
-    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/calendarView"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        app:mcv_showOtherDates="all"
-        app:mcv_selectionColor="#00F"
-        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray4"/>
+
+    <TextView
+        android:id="@+id/tv_schedule_date"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/underline"
+        android:gravity="center"
+        android:text="날짜를 입력해주세요."
+        android:textColor="@color/gray8"
+        android:textSize="18dp"/>
+
+    <TextView
+        android:id="@+id/tv_schedule_time"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/underline"
+        android:gravity="center"
+        android:text="시간을 입력해주세요."
+        android:textColor="@color/gray8"
+        android:textSize="18dp"/>
+
 
     <View
         android:layout_width="match_parent"
@@ -29,23 +54,10 @@
         android:background="@color/gray5"/>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="40dp"
         android:orientation="horizontal"
         android:layout_gravity="bottom">
-
-        <Button
-            android:id="@+id/btn_add_schedule"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="5"
-            android:background="@color/transparent"
-            android:text="추가"/>
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@color/gray4"/>
 
         <Button
             android:id="@+id/btn_dismiss_schedule_dialog"
@@ -53,7 +65,26 @@
             android:layout_height="match_parent"
             android:layout_weight="5"
             android:background="@color/transparent"
-            android:text="취소"/>
+            android:text="취소"
+            android:textSize="16dp"
+            android:textColor="@color/gray7"
+            android:textStyle="bold"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/gray4"/>
+
+        <Button
+            android:id="@+id/btn_add_schedule"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:background="@color/transparent"
+            android:text="추가"
+            android:textSize="16dp"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"/>
     </LinearLayout>
 
 </LinearLayout>

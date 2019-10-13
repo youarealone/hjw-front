@@ -35,13 +35,21 @@ public class ScheduleFragment extends Fragment {
             adapter.addItem(vo);
         }
 
+        view.findViewById(R.id.btn_open_add_schedule).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddScheduleDialogFragment dialogFragment = new AddScheduleDialogFragment();
+                dialogFragment.show(getFragmentManager(), AddScheduleDialogFragment.TAG);
+            }
+        });
+
         return view;
     }
 
     private ArrayList<ScheduleVO> makeList() {
         ArrayList<ScheduleVO> list = new ArrayList<ScheduleVO>();
         for (int i = 0; i < 4; i++) {
-            ScheduleVO vo = new ScheduleVO(i, "카멜리아힐"+i, "5/12 1"+i+":00");
+            ScheduleVO vo = new ScheduleVO(i, 2019, 1+i, i, 10, 30, "성산일출봉"+i);
             list.add(vo);
         }
         return list;

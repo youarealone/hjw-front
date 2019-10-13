@@ -40,8 +40,15 @@ public class ScheduleListAdapter extends BaseAdapter {
         // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
         ScheduleVO scheduleVO = listViewItemList.get(position);
 
+        String state = "AM";
+        int hour = scheduleVO.getHour();
         // 아이템 내 각 위젯에 데이터 반영
-        tvTime.setText(scheduleVO.getTime());
+        if (hour > 12) {
+            hour -= 12;
+            state = "PM";
+        }
+        // EditText에 출력할 형식 지정
+        tvTime.setText(state + " " + hour + "시 " + scheduleVO.getMinutes() + "분");
         tvContent.setText(scheduleVO.getContent());
 
         return convertView;

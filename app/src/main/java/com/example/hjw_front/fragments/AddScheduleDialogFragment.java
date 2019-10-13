@@ -16,6 +16,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.hjw_front.R;
+import com.example.hjw_front.repositories.ScheduleRepository;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -28,6 +29,7 @@ public class AddScheduleDialogFragment extends DialogFragment implements View.On
     private String content;
 
     Calendar myCalendar = Calendar.getInstance();
+    ScheduleRepository repository = ScheduleRepository.getInstance();
 
     DatePickerDialog.OnDateSetListener myDatePicker = new DatePickerDialog.OnDateSetListener() {
         @Override
@@ -98,11 +100,12 @@ public class AddScheduleDialogFragment extends DialogFragment implements View.On
         switch (v.getId()) {
             case R.id.btn_add_schedule:
                 content = ((EditText) view.findViewById(R.id.et_schedule_content)).getText().toString();
-                Toast.makeText(getContext(), sYear+ " " + sMonth + " " + sDay + " " + sHour + " " + sMinutes + " " + content, Toast.LENGTH_LONG).show();
+                repository.create(sYear, sMonth, sDay, sHour, sMinutes, content);
+                Toast.makeText(getContext(), "일정이 추가되었습니다.", Toast.LENGTH_SHORT).show();
+                dismiss();
                 break;
 
             case R.id.btn_dismiss_schedule_dialog:
-                Toast.makeText(getContext(), "취소", Toast.LENGTH_LONG).show();
                 dismiss();
                 break;
 

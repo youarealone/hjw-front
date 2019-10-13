@@ -35,6 +35,14 @@ public class ScheduleFragment extends Fragment {
             adapter.addItem(vo);
         }
 
+        view.findViewById(R.id.btn_open_add_schedule).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddScheduleDialogFragment dialogFragment = new AddScheduleDialogFragment();
+                dialogFragment.show(getFragmentManager(), AddScheduleDialogFragment.TAG);
+            }
+        });
+
         return view;
     }
 

@@ -38,6 +38,7 @@
         android:padding="5dp" />
 
     <Button
+        android:id="@+id/btn_open_add_schedule"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

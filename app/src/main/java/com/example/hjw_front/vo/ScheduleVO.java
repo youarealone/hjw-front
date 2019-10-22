@@ -1,7 +1,8 @@
 package com.example.hjw_front.vo;
 
 public class ScheduleVO {
-    private Integer id;
+    private String id;
+    private String uid;
     private Integer year;
     private Integer month;
     private Integer day;
@@ -12,8 +13,9 @@ public class ScheduleVO {
     public ScheduleVO() {
     }
 
-    public ScheduleVO(Integer id, Integer year, Integer month, Integer day, Integer hour, Integer minutes, String content) {
+    public ScheduleVO(String id, String uid, Integer year, Integer month, Integer day, Integer hour, Integer minutes, String content) {
         this.id = id;
+        this.uid = uid;
         this.year = year;
         this.month = month;
         this.day = day;
@@ -22,12 +24,20 @@ public class ScheduleVO {
         this.content = content;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public Integer getYear() {
@@ -80,6 +90,6 @@ public class ScheduleVO {
 
     @Override
     public String toString() {
-        return "[" + id + "] " + year + "/" + month + "/" + day + " " + hour + ":" + minutes + " " + content;
+        return "[" + uid + "] " + year + "/" + month + "/" + day + " " + hour + ":" + minutes + " " + content;
     }
 }

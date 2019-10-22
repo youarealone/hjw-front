@@ -10,17 +10,21 @@ import android.widget.TextView;
 import com.example.hjw_front.R;
 import com.example.hjw_front.vo.ScheduleVO;
 
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class ScheduleListAdapter extends BaseAdapter {
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList
-    private ArrayList<ScheduleVO> listViewItemList = new ArrayList<ScheduleVO>() ;
 
+    private ArrayList<ScheduleVO> listViewItemList = new ArrayList<ScheduleVO>() ;
     // Adapter에 사용되는 데이터의 개수를 리턴. : 필수 구현
+
     @Override
     public int getCount() {
         return listViewItemList.size() ;
+    }
+
+    public ScheduleListAdapter(ArrayList<ScheduleVO> list) {
+        this.listViewItemList = list;
     }
 
     // position에 위치한 데이터를 화면에 출력하는데 사용될 View를 리턴. : 필수 구현

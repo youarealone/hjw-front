@@ -1,11 +1,11 @@
 package com.example.hjw_front.repositories;
 
-import com.example.hjw_front.vo.ScheduleVO;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ScheduleRepository {
@@ -31,5 +31,9 @@ public class ScheduleRepository {
         map.put("content", content);
 
         reference.add(map);
+    }
+
+    public Task<QuerySnapshot> findByUid(String uid) {
+        return reference.whereEqualTo("uid", uid).get();
     }
 }

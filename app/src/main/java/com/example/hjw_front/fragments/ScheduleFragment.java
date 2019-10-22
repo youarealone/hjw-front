@@ -1,5 +1,6 @@
 package com.example.hjw_front.fragments;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -22,7 +24,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class ScheduleFragment extends Fragment {
     ScheduleRepository repository;
@@ -30,10 +35,31 @@ public class ScheduleFragment extends Fragment {
     private ScheduleListAdapter adapter;
     private ArrayList<ScheduleVO> mySchedules;
 
+    Calendar dateCalendar = Calendar.getInstance();
+    private int sYear;
+    private int sMonth;
+    private int sDay;
+
+    DatePickerDialog.OnDateSetListener myDatePicker;
+    private TextView tvToday;
+
     public ScheduleFragment() {
         this.repository = ScheduleRepository.getInstance();
         this.currentUser = FirebaseAuth.getInstance().getCurrentUser();
         this.mySchedules = new ArrayList<>();
+        myDatePicker = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                sYear = year;
+                sMonth = month + 1;
+                sDay = dayOfMonth;
+
+                dateCalendar.set(Calendar.YEAR, year);
+                dateCalendar.set(Calendar.MONTH, month);
+                dateCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+        };
     }
 
     @Override
@@ -45,9 +71,8 @@ public class ScheduleFragment extends Fragment {
         listView.setAdapter(adapter);
         listMySchedule(currentUser.getUid());
 
-        String mockToday = "5월 12일";
-        TextView tvToday = view.findViewById(R.id.tv_today);
-        tvToday.setText(mockToday);
+        tvToday = view.findViewById(R.id.tv_today);
+        updateLabel();
 
         for (ScheduleVO vo: mySchedules) {
             adapter.addItem(vo);
@@ -82,5 +107,12 @@ public class ScheduleFragment extends Fragment {
                         }
                     }
                 });
+    }
+
+    private void updateLabel() {
+        String myFormat = "yyyy/MM/dd";    // 출력형식   2018/11/28
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA);
+
+        tvToday.setText(sdf.format(dateCalendar.getTime()));
     }
 }

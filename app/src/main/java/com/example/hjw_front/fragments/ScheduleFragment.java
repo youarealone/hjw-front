@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.hjw_front.R;
 import com.example.hjw_front.adapters.ScheduleListAdapter;
@@ -31,15 +30,13 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class ScheduleFragment extends Fragment implements View.OnClickListener {
+    private final String TAG = "[SceduleFragment]";
     ScheduleRepository repository;
     FirebaseUser currentUser;
     private ScheduleListAdapter adapter;
     private ArrayList<ScheduleVO> mySchedules;
 
     Calendar dateCalendar = Calendar.getInstance();
-    private int sYear;
-    private int sMonth;
-    private int sDay;
 
     DatePickerDialog.OnDateSetListener myDatePicker;
     private Button btnToday;
@@ -51,14 +48,11 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener {
         myDatePicker = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                sYear = year;
-                sMonth = month + 1;
-                sDay = dayOfMonth;
-
                 dateCalendar.set(Calendar.YEAR, year);
                 dateCalendar.set(Calendar.MONTH, month);
                 dateCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 updateLabel();
+                listMySchedule(currentUser.getUid());
             }
         };
     }
@@ -115,23 +109,28 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener {
     }
 
     private void listMySchedule(String uid) {
-        this.repository.findByUid(uid)
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful() && task.getResult() != null) {
-                            for (QueryDocumentSnapshot document: task.getResult()) {
-                                ScheduleVO scheduleVO = document.toObject(ScheduleVO.class);
-                                scheduleVO.setId(document.getId());
-                                Log.d("[ScheduleFragment]", scheduleVO.toString());
-                                if (!mySchedules.contains(scheduleVO)) {
-                                    mySchedules.add(scheduleVO);
-                                }
-                                adapter.notifyDataSetChanged();
+        mySchedules.clear();
+        this.repository.findByUidAndDate(
+                uid
+                , dateCalendar.get(Calendar.YEAR)
+                , dateCalendar.get(Calendar.MONTH) + 1
+                , dateCalendar.get(Calendar.DAY_OF_MONTH))
+            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful() && task.getResult() != null) {
+                        for (QueryDocumentSnapshot document: task.getResult()) {
+                            ScheduleVO scheduleVO = document.toObject(ScheduleVO.class);
+                            scheduleVO.setId(document.getId());
+                            Log.d(TAG, scheduleVO.toString() + "이다");
+                            if (!mySchedules.contains(scheduleVO)) {
+                                mySchedules.add(scheduleVO);
                             }
+                            adapter.notifyDataSetChanged();
                         }
                     }
-                });
+                }
+            });
     }
 
     private void updateLabel() {

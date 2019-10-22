@@ -33,7 +33,12 @@ public class ScheduleRepository {
         reference.add(map);
     }
 
-    public Task<QuerySnapshot> findByUid(String uid) {
-        return reference.whereEqualTo("uid", uid).get();
+    public Task<QuerySnapshot> findByUidAndDate(String uid, Integer year, Integer month, Integer day) {
+        return reference
+                .whereEqualTo("uid", uid)
+                .whereEqualTo("year", year)
+                .whereEqualTo("month", month)
+                .whereEqualTo("day", day)
+                .get();
     }
 }

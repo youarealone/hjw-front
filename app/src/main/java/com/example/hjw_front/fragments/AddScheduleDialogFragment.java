@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import com.example.hjw_front.R;
 import com.example.hjw_front.repositories.ScheduleRepository;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -30,6 +32,7 @@ public class AddScheduleDialogFragment extends DialogFragment implements View.On
 
     Calendar myCalendar = Calendar.getInstance();
     ScheduleRepository repository = ScheduleRepository.getInstance();
+    FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
     DatePickerDialog.OnDateSetListener myDatePicker = new DatePickerDialog.OnDateSetListener() {
         @Override
@@ -100,7 +103,7 @@ public class AddScheduleDialogFragment extends DialogFragment implements View.On
         switch (v.getId()) {
             case R.id.btn_add_schedule:
                 content = ((EditText) view.findViewById(R.id.et_schedule_content)).getText().toString();
-                repository.create(sYear, sMonth, sDay, sHour, sMinutes, content);
+                repository.create(currentUser.getUid(), sYear, sMonth, sDay, sHour, sMinutes, content);
                 Toast.makeText(getContext(), "일정이 추가되었습니다.", Toast.LENGTH_SHORT).show();
                 dismiss();
                 break;

@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -41,7 +42,7 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener {
     private int sDay;
 
     DatePickerDialog.OnDateSetListener myDatePicker;
-    private TextView tvToday;
+    private Button btnToday;
 
     public ScheduleFragment() {
         this.repository = ScheduleRepository.getInstance();
@@ -69,7 +70,7 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener {
         initList(view);
         setListeners(view);
 
-        tvToday = view.findViewById(R.id.tv_today);
+        btnToday = view.findViewById(R.id.btn_today);
         updateLabel();
 
         return view;
@@ -81,6 +82,15 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener {
             case R.id.btn_open_add_schedule:
                 AddScheduleDialogFragment dialogFragment = new AddScheduleDialogFragment();
                 dialogFragment.show(getFragmentManager(), AddScheduleDialogFragment.TAG);
+                break;
+
+            case R.id.btn_today:
+                new DatePickerDialog(getContext()
+                        , myDatePicker
+                        , dateCalendar.get(Calendar.YEAR)
+                        , dateCalendar.get(Calendar.MONTH)
+                        , dateCalendar.get(Calendar.DAY_OF_MONTH)
+                ).show();
                 break;
 
             default:
@@ -101,6 +111,7 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener {
 
     private void setListeners(View view) {
         view.findViewById(R.id.btn_open_add_schedule).setOnClickListener(this);
+        view.findViewById(R.id.btn_today).setOnClickListener(this);
     }
 
     private void listMySchedule(String uid) {
@@ -127,6 +138,6 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener {
         String myFormat = "yyyy/MM/dd";    // 출력형식   2018/11/28
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA);
 
-        tvToday.setText(sdf.format(dateCalendar.getTime()));
+        btnToday.setText(sdf.format(dateCalendar.getTime()));
     }
 }

@@ -14,7 +14,7 @@
         android:paddingStart="5dp">
 
         <Button
-            android:id="@+id/tv_today"
+            android:id="@+id/btn_today"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"

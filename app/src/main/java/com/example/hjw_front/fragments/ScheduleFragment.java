@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class ScheduleFragment extends Fragment {
+public class ScheduleFragment extends Fragment implements View.OnClickListener {
     ScheduleRepository repository;
     FirebaseUser currentUser;
     private ScheduleListAdapter adapter;
@@ -66,27 +66,41 @@ public class ScheduleFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_schedule, container, false);
 
+        initList(view);
+        setListeners(view);
+
+        tvToday = view.findViewById(R.id.tv_today);
+        updateLabel();
+
+        return view;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_open_add_schedule:
+                AddScheduleDialogFragment dialogFragment = new AddScheduleDialogFragment();
+                dialogFragment.show(getFragmentManager(), AddScheduleDialogFragment.TAG);
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    private void initList(View view) {
         adapter = new ScheduleListAdapter(mySchedules);
         ListView listView = view.findViewById(R.id.lv_schedule);
         listView.setAdapter(adapter);
         listMySchedule(currentUser.getUid());
 
-        tvToday = view.findViewById(R.id.tv_today);
-        updateLabel();
-
         for (ScheduleVO vo: mySchedules) {
             adapter.addItem(vo);
         }
+    }
 
-        view.findViewById(R.id.btn_open_add_schedule).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AddScheduleDialogFragment dialogFragment = new AddScheduleDialogFragment();
-                dialogFragment.show(getFragmentManager(), AddScheduleDialogFragment.TAG);
-            }
-        });
-
-        return view;
+    private void setListeners(View view) {
+        view.findViewById(R.id.btn_open_add_schedule).setOnClickListener(this);
     }
 
     private void listMySchedule(String uid) {

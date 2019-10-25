@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginEnd="10dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_arrow"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="홍길동"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:textColor="@color/gray8"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:text="19.00.00 ~ 19.00.00"
+                android:textSize="14dp"
+                android:textColor="@color/gray6"/>
+
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/label"
+                android:text="#라벨"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="16dp"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="내일 월정리 갈건데~~~ 파티원구함 \n 여자한정 \n 사진찍어용"
+        android:textSize="16dp"
+        android:textColor="@color/gray8"
+        android:lineSpacingMultiplier="1.2"/>
+
+</LinearLayout>

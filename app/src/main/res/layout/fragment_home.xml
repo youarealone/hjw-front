@@ -39,14 +39,20 @@
         android:gravity="center">
 
         <ImageView
-            android:layout_width="match_parent"
+            android:id="@+id/iv_home_editorpick1"
+            android:layout_width="290dp"
             android:layout_height="150dp"
             android:layout_marginBottom="40dp"
+            android:scaleType="fitXY"
+            android:background="@drawable/under_right_shadow"
             android:src="@drawable/editorpick1"/>
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="175dp"
+            android:id="@+id/iv_home_editorpick2"
+            android:layout_width="290dp"
+            android:layout_height="150dp"
+            android:scaleType="fitXY"
+            android:background="@drawable/under_right_shadow"
             android:src="@drawable/editorpick2"/>
 
     </LinearLayout>

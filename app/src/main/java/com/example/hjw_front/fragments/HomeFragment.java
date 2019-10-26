@@ -26,6 +26,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         view.findViewById(R.id.container_search).setOnClickListener(this);
+        view.findViewById(R.id.iv_home_editorpick1).setOnClickListener(this);
 
         return view;
     }
@@ -35,6 +36,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.container_search:
                 fragmentChanger.changeFragment(new SearchFragment());
+                break;
+
+            case R.id.iv_home_editorpick1:
+                fragmentChanger.changeFragment(new EditorPick1Fragment());
                 break;
 
             default:

@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import com.example.hjw_front.R;
 import com.example.hjw_front.utils.FragmentChanger;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements View.OnClickListener {
     private FragmentChanger fragmentChanger = null;
 
     @Override
@@ -25,10 +25,25 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        view.findViewById(R.id.container_search).setOnClickListener(v -> fragmentChanger.changeFragment(new SearchFragment()));
-
-        view.findViewById(R.id.btn_userInfo).setOnClickListener(v -> fragmentChanger.changeFragment(new UserInfoFragment()));
+        view.findViewById(R.id.container_search).setOnClickListener(this);
+        view.findViewById(R.id.iv_home_editorpick1).setOnClickListener(this);
 
         return view;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.container_search:
+                fragmentChanger.changeFragment(new SearchFragment());
+                break;
+
+            case R.id.iv_home_editorpick1:
+                fragmentChanger.changeFragment(new EditorPick1Fragment());
+                break;
+
+            default:
+                break;
+        }
     }
 }

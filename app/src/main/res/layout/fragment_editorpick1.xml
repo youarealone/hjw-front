@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="60dp"
+        android:paddingLeft="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:background="@drawable/pinkmuhly">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="월간제주 10月"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="bottom">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:text="핑크뮬리, 축제에서 백배로 즐기기"
+                    android:textSize="24dp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center"
+                    android:text="'갈대'하면 무슨 색이 떠올라? \n갈색? \n난 분홍색이 떠올라!"
+                    android:textSize="18dp"
+                    android:textColor="@color/gray8"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginLeft="30dp"
+                    android:background="@color/gray8"/>
+
+                <ImageView
+                    android:layout_width="200dp"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/pinkmuhly"/>
+
+                <TextView
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:textSize="14dp"
+                    android:text="이번에 내가 소개할 여행지는 휴애리 핑크뮬리 축제야!"
+                    android:textColor="@color/gray8"/>
+
+                <TextView
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/gray8"
+                    android:textSize="14dp"
+                    android:text="9월11일부터 11월20일까지 하는 이 축제는 산토끼랑 흑염소, 산양, 염소, 말 등 다양한 동물친구들에게 먹이를 줄 수도 있고, ‘흑돼지야 놀자’라는 똥똥한 흑돼지들의 재롱을 볼 수도 있어. "/>
+
+                <TextView
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/gray8"
+                    android:textSize="14dp"
+                    android:text="그리고 제주만의 대표적인 체험인 승마체험과 야생화 자연학습체험으로 경험치도 쑥쑥 올라갈 수도 있지. 너희 돌탑 쌓기, 투호던지기, 굴렁쇠 체험은 해봤어? 사실 난 굴렁쇠는 어렸을 때, 학교에서 굴려봤어. 내 나이는 비밀~"/>
+
+            </LinearLayout>
+    </LinearLayout>
+</ScrollView>

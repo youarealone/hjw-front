@@ -5,6 +5,7 @@ public class PlaceVO {
     private String placeAdress;
     private String placeImage;
     private int placePrice;
+    private int placePriceOrigin;
 
     public String getPlaceName() {
         return placeName;
@@ -36,5 +37,13 @@ public class PlaceVO {
 
     public void setPlacePrice(int placePrice) {
         this.placePrice = placePrice;
+    }
+
+    public int getPlacePriceOrigin() {
+        return placePriceOrigin;
+    }
+
+    public void setPlacePriceOrigin(int placePriceOrigin) {
+        this.placePriceOrigin = placePriceOrigin;
     }
 }

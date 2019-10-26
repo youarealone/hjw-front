@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import com.example.hjw_front.R;
 import com.example.hjw_front.adapters.AccompanyAdapter;
+import com.example.hjw_front.utils.FragmentChanger;
 import com.example.hjw_front.vo.AccompanyPostVO;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -47,6 +48,14 @@ public class AccompanyFragment extends Fragment {
         AccompanyAdapter adapter = new AccompanyAdapter(posts);
         ListView listView = view.findViewById(R.id.lv_accompany_posts);
         listView.setAdapter(adapter);
+
+        view.findViewById(R.id.btn_accompany_write).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentChanger fragmentChanger = new FragmentChanger(getFragmentManager());
+                fragmentChanger.changeFragment(new WriteAccompanyFragment());
+            }
+        });
 
         return view;
     }

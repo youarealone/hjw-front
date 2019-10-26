@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="area">
+        <item>지역을 선택해주세요.</item>
+        <item>애월읍</item>
+        <item>제주시</item>
+        <item>서귀포시</item>
+        <item>성산읍</item>
+        <item>남원읍</item>
+        <item>대정읍</item>
+    </string-array>
+</resources>

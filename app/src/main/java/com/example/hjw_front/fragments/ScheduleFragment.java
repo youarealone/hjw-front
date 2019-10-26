@@ -1,10 +1,12 @@
 package com.example.hjw_front.fragments;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +42,7 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener {
 
     DatePickerDialog.OnDateSetListener myDatePicker;
     private Button btnToday;
+    private SwipeRefreshLayout refreshLayout;
 
     public ScheduleFragment() {
         this.repository = ScheduleRepository.getInstance();
@@ -60,6 +63,8 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_schedule, container, false);
+
+        refreshLayout = view.findViewById(R.id.layout_schedule_container);
 
         initList(view);
         setListeners(view);
@@ -106,6 +111,14 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener {
     private void setListeners(View view) {
         view.findViewById(R.id.btn_open_add_schedule).setOnClickListener(this);
         view.findViewById(R.id.btn_today).setOnClickListener(this);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                listMySchedule(currentUser.getUid());
+
+                refreshLayout.setRefreshing(false);
+            }
+        });
     }
 
     private void listMySchedule(String uid) {
@@ -130,6 +143,8 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener {
                     }
                 }
             });
+        adapter.notifyDataSetChanged();
+
     }
 
     private void updateLabel() {

@@ -34,6 +34,7 @@ public class WriteAccompanyFragment extends Fragment implements View.OnClickList
 
         tvStartDate.setOnClickListener(this);
         tvEndDate.setOnClickListener(this);
+        view.findViewById(R.id.iv_write_accompany_close).setOnClickListener(this);
 
         startCalendar = Calendar.getInstance();
         startDatePicker = new DatePickerDialog.OnDateSetListener() {
@@ -87,6 +88,10 @@ public class WriteAccompanyFragment extends Fragment implements View.OnClickList
                         , endCalendar.get(Calendar.MONTH)
                         , endCalendar.get(Calendar.DAY_OF_MONTH)
                 ).show();
+                break;
+
+            case R.id.iv_write_accompany_close:
+                getActivity().onBackPressed();
                 break;
 
             default:

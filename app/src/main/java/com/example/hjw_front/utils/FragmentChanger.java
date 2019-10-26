@@ -15,6 +15,8 @@ public class FragmentChanger {
 
     public void changeFragment(Fragment fragment) {
         FragmentTransaction transaction = this.fragmentManager.beginTransaction();
-        transaction.replace(R.id.container, fragment).commitAllowingStateLoss();
+        transaction.replace(R.id.container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }

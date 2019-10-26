@@ -49,7 +49,7 @@ public class AccompanyFragment extends Fragment {
         ListView listView = view.findViewById(R.id.lv_accompany_posts);
         listView.setAdapter(adapter);
 
-        view.findViewById(R.id.btn_write_accompany).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.btn_accompany_write).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentChanger fragmentChanger = new FragmentChanger(getFragmentManager());

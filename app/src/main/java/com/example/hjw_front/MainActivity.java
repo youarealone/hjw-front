@@ -3,19 +3,19 @@ package com.example.hjw_front;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.Button;
 
+import com.example.hjw_front.adapters.FragmentPagerItemAdapter;
 import com.example.hjw_front.fragments.AccompanyFragment;
 import com.example.hjw_front.fragments.BookmarkFragment;
-import com.example.hjw_front.fragments.DiscountFragment;
 import com.example.hjw_front.fragments.HomeFragment;
 import com.example.hjw_front.fragments.LocationFragment;
 import com.example.hjw_front.fragments.PlaceFragment;
 import com.example.hjw_front.fragments.ScheduleFragment;
+import com.example.hjw_front.fragments.SearchFragment;
 import com.example.hjw_front.fragments.SosFragment;
 import com.example.hjw_front.utils.FragmentChanger;
 import com.example.hjw_front.utils.PermissionChecker;
@@ -27,6 +27,8 @@ import static com.example.hjw_front.utils.RequestCode.RC_GOOGLE_LOGIN;
 
 public class MainActivity extends AppCompatActivity {
     FragmentChanger fragmentChanger = null;
+    FragmentPagerItemAdapter adapter;
+    ViewPager viewPager;
 
     //파이어베이스 데이터베이스 추가
     private FirebaseDatabase firebaseDatabase;
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     public MainActivity() {
         this.fragmentChanger = new FragmentChanger(getSupportFragmentManager());
+        this.adapter = new FragmentPagerItemAdapter(getSupportFragmentManager());
     }
 
     @Override
@@ -50,48 +53,14 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        fragmentChanger.changeFragment(new HomeFragment());
 
-        Button btn_bk = findViewById(R.id.menu_bookmark);
-        btn_bk.setOnClickListener(view -> fragmentChanger.changeFragment(new BookmarkFragment()));
+        findViewById(R.id.menu_search).setOnClickListener(view -> fragmentChanger.changeFragment(new SearchFragment()));
 
-        findViewById(R.id.menu_list).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fragmentChanger.changeFragment(new AccompanyFragment());
-            }
-        });
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        setupViewPager(viewPager);
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottombar);
-        bottomNavigationView.setOnNavigationItemSelectedListener(menuItem -> {
-            switch (menuItem.getItemId()) {
-                case R.id.menu_discount:
-                    fragmentChanger.changeFragment(new PlaceFragment());
-                    break;
-
-                case R.id.menu_location:
-                    fragmentChanger.changeFragment(new LocationFragment());
-                    break;
-
-                case R.id.menu_home:
-                    fragmentChanger.changeFragment(new HomeFragment());
-                    break;
-
-                case R.id.menu_schedule:
-                    fragmentChanger.changeFragment(new ScheduleFragment());
-                    break;
-
-                case R.id.menu_sos:
-                    fragmentChanger.changeFragment(new SosFragment());
-                    break;
-
-
-                default:
-                    break;
-            }
-
-            return true;
-        });
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
 
     }
 
@@ -117,5 +86,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, RC_GOOGLE_LOGIN);
             }
         }
+    }
+
+    private void setupViewPager(ViewPager viewPager) {
+        adapter.addFragment(new HomeFragment(), "홈");
+        adapter.addFragment(new PlaceFragment(), "할인받안?");
+        adapter.addFragment(new LocationFragment(), "병원어딘?");
+        adapter.addFragment(new AccompanyFragment(), "고치가게!");
+        adapter.addFragment(new ScheduleFragment(), "오늘뭐할거?");
+        adapter.addFragment(new SosFragment(), "SOS!");
+        adapter.addFragment(new BookmarkFragment(), "어디좋안?");
+//        adapter.addFragment(new SosFragment(), "마이혼자완");
+        viewPager.setAdapter(adapter);
     }
 }

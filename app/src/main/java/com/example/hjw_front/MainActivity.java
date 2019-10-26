@@ -3,18 +3,14 @@ package com.example.hjw_front;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.Button;
 
 import com.example.hjw_front.adapters.FragmentPagerItemAdapter;
 import com.example.hjw_front.fragments.AccompanyFragment;
 import com.example.hjw_front.fragments.BookmarkFragment;
-import com.example.hjw_front.fragments.DiscountFragment;
 import com.example.hjw_front.fragments.HomeFragment;
 import com.example.hjw_front.fragments.LocationFragment;
 import com.example.hjw_front.fragments.PlaceFragment;
@@ -57,11 +53,10 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        fragmentChanger.changeFragment(new HomeFragment());
 
         findViewById(R.id.menu_search).setOnClickListener(view -> fragmentChanger.changeFragment(new SearchFragment()));
 
-        viewPager = (ViewPager) findViewById(R.id.container);
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);

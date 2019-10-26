@@ -122,7 +122,6 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener {
                         for (QueryDocumentSnapshot document: task.getResult()) {
                             ScheduleVO scheduleVO = document.toObject(ScheduleVO.class);
                             scheduleVO.setId(document.getId());
-                            Log.d(TAG, scheduleVO.toString() + "이다");
                             if (!mySchedules.contains(scheduleVO)) {
                                 mySchedules.add(scheduleVO);
                             }

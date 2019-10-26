@@ -19,6 +19,7 @@ import com.example.hjw_front.fragments.HomeFragment;
 import com.example.hjw_front.fragments.LocationFragment;
 import com.example.hjw_front.fragments.PlaceFragment;
 import com.example.hjw_front.fragments.ScheduleFragment;
+import com.example.hjw_front.fragments.SearchFragment;
 import com.example.hjw_front.fragments.SosFragment;
 import com.example.hjw_front.utils.FragmentChanger;
 import com.example.hjw_front.utils.PermissionChecker;
@@ -58,8 +59,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         fragmentChanger.changeFragment(new HomeFragment());
 
-        Button btn_bk = findViewById(R.id.menu_bookmark);
-        btn_bk.setOnClickListener(view -> fragmentChanger.changeFragment(new BookmarkFragment()));
+        findViewById(R.id.menu_search).setOnClickListener(view -> fragmentChanger.changeFragment(new SearchFragment()));
 
         viewPager = (ViewPager) findViewById(R.id.container);
         setupViewPager(viewPager);
@@ -93,12 +93,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void setupViewPager(ViewPager viewPager) {
+    private void setupViewPager(ViewPager viewPager) {
         adapter.addFragment(new HomeFragment(), "홈");
         adapter.addFragment(new PlaceFragment(), "할인받안?");
         adapter.addFragment(new LocationFragment(), "병원어딘?");
         adapter.addFragment(new AccompanyFragment(), "고치가게!");
-        adapter.addFragment(new SosFragment(), "마이혼자완");
+        adapter.addFragment(new ScheduleFragment(), "오늘뭐할거?");
+        adapter.addFragment(new SosFragment(), "SOS!");
+        adapter.addFragment(new BookmarkFragment(), "어디좋안?");
+//        adapter.addFragment(new SosFragment(), "마이혼자완");
         viewPager.setAdapter(adapter);
     }
 }

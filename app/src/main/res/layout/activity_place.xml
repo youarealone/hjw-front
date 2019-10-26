@@ -58,44 +58,37 @@
         app:layout_constraintStart_toStartOf="@+id/linearLayout"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/view">
-
-        <TextView
-            android:id="@+id/textView11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="8dp"
-            android:text="애월읍"
-            android:textAlignment="textStart"
-            android:textSize="25sp"
-            android:textStyle="bold" />
-
-        <ImageButton
-            android:id="@+id/imageButton2"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="8dp"
-            android:background="@color/white"
-            app:srcCompat="@drawable/downbutton" />
-    </LinearLayout>
-
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/view"
         app:srcCompat="@drawable/pricemap" />
+
+    <LinearLayout
+        android:id="@+id/spinnerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toStartOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3">
+
+        <Spinner
+            android:id="@+id/spinner_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/placeView"
@@ -106,7 +99,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@id/spinnerLayout"
         app:layout_constraintVertical_bias="0.0" />
 
 

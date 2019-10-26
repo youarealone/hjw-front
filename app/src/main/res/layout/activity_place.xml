@@ -9,7 +9,7 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="35dp"
         android:layout_marginTop="6dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,7 +38,7 @@
         <ImageButton
             android:id="@+id/imageButton"
             android:layout_width="10dp"
-            android:layout_height="35dp"
+            android:layout_height="30dp"
             android:layout_weight="1"
             android:adjustViewBounds="true"
             android:background="@android:color/white"
@@ -98,13 +98,16 @@
         app:srcCompat="@drawable/pricemap" />
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/placeView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_margin="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </android.support.constraint.ConstraintLayout>

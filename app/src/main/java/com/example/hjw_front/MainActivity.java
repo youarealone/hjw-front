@@ -12,6 +12,7 @@ import com.example.hjw_front.fragments.BookmarkFragment;
 import com.example.hjw_front.fragments.DiscountFragment;
 import com.example.hjw_front.fragments.HomeFragment;
 import com.example.hjw_front.fragments.LocationFragment;
+import com.example.hjw_front.fragments.PlaceFragment;
 import com.example.hjw_front.fragments.ScheduleFragment;
 import com.example.hjw_front.fragments.SosFragment;
 import com.example.hjw_front.utils.FragmentChanger;
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(menuItem -> {
             switch (menuItem.getItemId()) {
                 case R.id.menu_discount:
-                    fragmentChanger.changeFragment(new DiscountFragment());
+                    fragmentChanger.changeFragment(new PlaceFragment());
                     break;
 
                 case R.id.menu_location:

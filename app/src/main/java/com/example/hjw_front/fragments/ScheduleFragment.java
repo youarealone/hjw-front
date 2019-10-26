@@ -47,7 +47,7 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener {
     public ScheduleFragment() {
         this.repository = ScheduleRepository.getInstance();
         this.currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        this.mySchedules = new ArrayList<>();
+        this.mySchedules = new ArrayList<ScheduleVO>();
         myDatePicker = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {

@@ -1,12 +1,14 @@
 package com.example.hjw_front;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.example.hjw_front.adapters.FragmentPagerItemAdapter;
 import com.example.hjw_front.fragments.AccompanyFragment;
@@ -47,12 +49,11 @@ public class MainActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
 
+        initFullScreen();
+        initToolbar();
+
         PermissionChecker permissionChecker = new PermissionChecker(this);
         permissionChecker.permissionCheck();
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         findViewById(R.id.menu_search).setOnClickListener(view -> fragmentChanger.changeFragment(new SearchFragment()));
 
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+
 
     }
 
@@ -86,6 +88,22 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, RC_GOOGLE_LOGIN);
             }
         }
+    }
+
+    private void initToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+    }
+
+    private void initFullScreen() {
+        View decorView = getWindow().getDecorView();
+        int uiOption = getWindow().getDecorView().getSystemUiVisibility();
+        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN )
+            uiOption |= View.SYSTEM_UI_FLAG_FULLSCREEN;
+        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT )
+            uiOption |= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+        decorView.setSystemUiVisibility( uiOption );
     }
 
     private void setupViewPager(ViewPager viewPager) {

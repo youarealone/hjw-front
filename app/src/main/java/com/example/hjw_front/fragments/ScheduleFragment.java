@@ -102,10 +102,6 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener {
         ListView listView = view.findViewById(R.id.lv_schedule);
         listView.setAdapter(adapter);
         listMySchedule(currentUser.getUid());
-
-        for (ScheduleVO vo: mySchedules) {
-            adapter.addItem(vo);
-        }
     }
 
     private void setListeners(View view) {

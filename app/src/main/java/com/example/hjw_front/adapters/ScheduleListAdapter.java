@@ -1,6 +1,7 @@
 package com.example.hjw_front.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import com.example.hjw_front.vo.ScheduleVO;
 import java.util.ArrayList;
 
 public class ScheduleListAdapter extends BaseAdapter {
+    private final String TAG = "[ScheduleAdapter]";
     private ArrayList<ScheduleVO> listViewItemList;
 
     public ScheduleListAdapter(ArrayList<ScheduleVO> list) {
@@ -22,9 +24,9 @@ public class ScheduleListAdapter extends BaseAdapter {
     @Override
     public int getCount() {
         if (listViewItemList != null) {
-            this.listViewItemList = new ArrayList<ScheduleVO>();
             return listViewItemList.size() ;
         } else {
+            this.listViewItemList = new ArrayList<ScheduleVO>();
             return 0;
         }
     }

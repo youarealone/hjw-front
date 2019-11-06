@@ -3,12 +3,12 @@ package com.example.hjw_front;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.hjw_front.adapters.FragmentPagerItemAdapter;
 import com.example.hjw_front.fragments.AccompanyFragment;
@@ -21,6 +21,7 @@ import com.example.hjw_front.fragments.SearchFragment;
 import com.example.hjw_front.fragments.SosFragment;
 import com.example.hjw_front.utils.FragmentChanger;
 import com.example.hjw_front.utils.PermissionChecker;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;

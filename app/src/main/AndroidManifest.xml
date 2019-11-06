@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/hjw_logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/hjw_logo_round"
@@ -19,8 +19,10 @@
         <activity android:name=".fragments.BookmarkFragment"></activity>
 
         <meta-data
-            android:name="com.kakao.sdk.AppKey"
-            android:value="d948ab0542bbaef9eda02f65e48c7309" />
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBnKCVMvSkb2fk98klhkwbOTSQl_n2lYlk" />
+
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
 
         <activity
             android:name=".SplashActivity"
@@ -31,7 +33,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity">
+
+
+        </activity>
         <activity android:name=".GoogleLoginActivity" />
     </application>
 

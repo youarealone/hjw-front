@@ -3,7 +3,6 @@ package com.example.hjw_front.fragments;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,11 +13,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import com.example.hjw_front.R;
-import com.example.hjw_front.adapters.BookmarkAdapter;
-import com.example.hjw_front.adapters.PlaceAdapter;
+import androidx.core.app.Fragment;
 
-import java.util.List;
+import com.example.hjw_front.R;
+import com.example.hjw_front.adapters.PlaceAdapter;
 
 public class PlaceFragment extends Fragment {
     RecyclerView placeView;

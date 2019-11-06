@@ -1,6 +1,7 @@
 package com.example.hjw_front.vo;
 
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 
 public class SosContractVO {
     private String id;

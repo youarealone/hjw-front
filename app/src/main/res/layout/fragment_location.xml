@@ -6,6 +6,32 @@
     android:layout_height="match_parent"
     android:padding="10dp">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/FindHos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/blue_round_background"
+            android:text="병원 찾기"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/findFar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/blue_round_background"
+            android:text="약국 찾기"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </LinearLayout>
+
     <RelativeLayout
         android:id="@+id/map_view"
         android:layout_width="match_parent"

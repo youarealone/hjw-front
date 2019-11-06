@@ -635,7 +635,7 @@ public class LocationFragment extends Fragment implements
 
         new NRPlaces.Builder()
                 .listener(this)
-                .key("AIzaSyCrVdRh93X5Spy61KZYiAd5gn0Ztt8c-qQ")
+                .key(getString(R.string.googleMapFind))
                 .latlng(location.latitude, location.longitude)//현재 위치
                 .radius(3000) //3km 내에서 검색
                 .type(PlaceType.HOSPITAL) //병원
@@ -652,7 +652,7 @@ public class LocationFragment extends Fragment implements
 
         new NRPlaces.Builder()
                 .listener(this)
-                .key("AIzaSyCrVdRh93X5Spy61KZYiAd5gn0Ztt8c-qQ")
+                .key(getString(R.string.googleMapFind))
                 .latlng(location.latitude, location.longitude)//현재 위치
                 .radius(3000) //3km 내에서 검색
                 .type(PlaceType.PHARMACY) //약국

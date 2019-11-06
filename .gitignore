@@ -225,3 +225,4 @@ fabric.properties
 .idea/httpRequests
 
 /.idea/
+/gradle.properties

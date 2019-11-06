@@ -48,14 +48,26 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+
+import noman.googleplaces.NRPlaces;
+import noman.googleplaces.Place;
+import noman.googleplaces.PlaceType;
+import noman.googleplaces.PlacesException;
+import noman.googleplaces.PlacesListener;
 
 import static android.content.Context.LOCATION_SERVICE;
 
 public class LocationFragment extends Fragment implements
         OnMapReadyCallback,
-        ActivityCompat.OnRequestPermissionsResultCallback {
+        ActivityCompat.OnRequestPermissionsResultCallback,
+        PlacesListener {
+
+
+
     private static final String TAG = "googlemap_example";
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int UPDATE_INTERVAL_MS = 1000;  // 1초
@@ -63,10 +75,13 @@ public class LocationFragment extends Fragment implements
     // onRequestPermissionsResult에서 수신된 결과에서 ActivityCompat.requestPermissions를 사용한 퍼미션 요청을 구별하기 위해 사용됩니다.
     private static final int PERMISSIONS_REQUEST_CODE = 100;
     boolean needRequest = false;
+
+
     // 앱을 실행하기 위해 필요한 퍼미션을 정의합니다.
     String[] REQUIRED_PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};  // 외부 저장소
     Location mCurrentLocatiion;
     LatLng currentPosition;
+
     private Marker currentMarker = null;
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationRequest locationRequest;
@@ -127,7 +142,7 @@ public class LocationFragment extends Fragment implements
 
     };
     private TextView tv_addr;
-    private Button btnCurrent, findFar, findHos;
+    private Button findPar, findHos;
 
     @Override
     public void onAttach(Context context) {
@@ -160,10 +175,9 @@ public class LocationFragment extends Fragment implements
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_location, container, false);
 
-        findFar = view.findViewById(R.id.findFar);
+        findPar = view.findViewById(R.id.findFar);
         findHos = view.findViewById(R.id.findHos);
         tv_addr = view.findViewById(R.id.tv_addr_doro);
-        btnCurrent = view.findViewById(R.id.btn_current);
         gmap = (MapView) view.findViewById(R.id.map);
         locationRequest = new LocationRequest()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
@@ -182,19 +196,20 @@ public class LocationFragment extends Fragment implements
         gmap.onCreate(savedInstanceState);
         gmap.getMapAsync(this);
 
+        previous_marker = new ArrayList<Marker>();
         //병원 찾기
         findHos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                showPlaceHospital(currentPosition);
             }
         });
 
         //약국 찾기
-        findFar.setOnClickListener(new View.OnClickListener() {
+        findPar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                showPlaceParmacy(currentPosition);
             }
         });
 
@@ -562,5 +577,88 @@ public class LocationFragment extends Fragment implements
                 break;
         }
     }
+
+    @Override
+    public void onPlacesFailure(PlacesException e) {
+
+    }
+
+    @Override
+    public void onPlacesStart() {
+
+    }
+
+    @Override
+    public void onPlacesSuccess(final List<Place> places) {
+        this.activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                for (noman.googleplaces.Place place : places) {
+
+                    LatLng latLng
+                            = new LatLng(place.getLatitude()
+                            , place.getLongitude());
+
+                    String markerSnippet = getCurrentAddress(latLng);
+
+                    MarkerOptions markerOptions = new MarkerOptions();
+                    markerOptions.position(latLng);
+                    markerOptions.title(place.getName());
+                    markerOptions.snippet(markerSnippet);
+                    Marker item = mMap.addMarker(markerOptions);
+                    previous_marker.add(item);
+
+                }
+
+                //중복 마커 제거
+                HashSet<Marker> hashSet = new HashSet<Marker>();
+                hashSet.addAll(previous_marker);
+                previous_marker.clear();
+                previous_marker.addAll(hashSet);
+
+            }
+        });
+
+    }
+
+    @Override
+    public void onPlacesFinished() {
+
+    }
+
+    public void showPlaceHospital(LatLng location)
+    {
+        mMap.clear();//지도 클리어
+
+        if (previous_marker != null)
+            previous_marker.clear();//지역정보 마커 클리어
+
+        new NRPlaces.Builder()
+                .listener(this)
+                .key("AIzaSyCrVdRh93X5Spy61KZYiAd5gn0Ztt8c-qQ")
+                .latlng(location.latitude, location.longitude)//현재 위치
+                .radius(15000) //3km 내에서 검색
+                .type(PlaceType.HOSPITAL) //병원
+                .build()
+                .execute();
+    }
+
+    public void showPlaceParmacy(LatLng location)
+    {
+        mMap.clear();//지도 클리어
+
+        if (previous_marker != null)
+            previous_marker.clear();//지역정보 마커 클리어
+
+        new NRPlaces.Builder()
+                .listener(this)
+                .key("AIzaSyCrVdRh93X5Spy61KZYiAd5gn0Ztt8c-qQ")
+                .latlng(location.latitude, location.longitude)//현재 위치
+                .radius(15000) //3km 내에서 검색
+                .type(PlaceType.PHARMACY) //약국
+                .build()
+                .execute();
+    }
+
 
 }

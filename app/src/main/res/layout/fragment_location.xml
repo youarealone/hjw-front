@@ -82,7 +82,7 @@
             android:id="@+id/tv_addr_doro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="제주 서귀포시 안덕면 병악로 166"
+            android:text="주소"
             android:textColor="@color/white" />
 
         <!--        <TextView-->

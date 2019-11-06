@@ -44,7 +44,7 @@
         android:textSize="20dp"
         android:textColor="@color/gray8"/>
 
-    <androidx.core.widget.SwipeRefreshLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/layout_schedule_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -55,5 +55,5 @@
             android:layout_height="wrap_content"
             android:background="@drawable/round_border"
             android:padding="5dp" />
-    </androidx.core.widget.SwipeRefreshLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </LinearLayout>

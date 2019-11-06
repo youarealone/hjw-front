@@ -22,6 +22,8 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBnKCVMvSkb2fk98klhkwbOTSQl_n2lYlk" />
 
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+
         <activity
             android:name=".SplashActivity"
             android:theme="@style/splash">
@@ -31,7 +33,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity">
+
+
+        </activity>
         <activity android:name=".GoogleLoginActivity" />
     </application>
 

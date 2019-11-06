@@ -15,6 +15,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.hjw_front.R;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
@@ -63,6 +64,9 @@ public class LocationFragment extends Fragment implements
     // 구글 맵 사용
     @Override
     public void onMapReady(final GoogleMap googleMap) {
+
+        mMap = googleMap;
+
         LatLng SEOUL = new LatLng(37.56, 126.97);
 
         MarkerOptions markerOptions = new MarkerOptions();
@@ -70,6 +74,9 @@ public class LocationFragment extends Fragment implements
         markerOptions.title("서울");
         markerOptions.snippet("한국의 수도");
         mMap.addMarker(markerOptions);
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(SEOUL));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
     }
 
     @Override

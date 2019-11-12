@@ -2,12 +2,14 @@ package com.example.hjw_front.fragments;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -128,9 +130,18 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener {
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                     if (task.isSuccessful() && task.getResult() != null) {
                         for (QueryDocumentSnapshot document: task.getResult()) {
+                            boolean isDuplicate = false;
                             ScheduleVO scheduleVO = document.toObject(ScheduleVO.class);
                             scheduleVO.setId(document.getId());
-                            if (!mySchedules.contains(scheduleVO)) {
+
+                            for (ScheduleVO mySchedule: mySchedules) {
+                                if (mySchedule.getId().equals(scheduleVO.getId())) {
+                                    isDuplicate = true;
+                                    break;
+                                }
+                            }
+
+                            if (!isDuplicate) {
                                 mySchedules.add(scheduleVO);
                             }
                             adapter.notifyDataSetChanged();

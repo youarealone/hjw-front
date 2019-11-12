@@ -1,7 +1,9 @@
 package com.example.hjw_front.fragments;
 
 import android.app.DatePickerDialog;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import com.example.hjw_front.R;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -31,10 +34,13 @@ public class WriteAccompanyFragment extends Fragment implements View.OnClickList
     private Calendar startCalendar, lastCalendar;
     private DatePickerDialog.OnDateSetListener startDatePicker, lastDatePicker;
 
+    private ArrayList<String> selectedTags;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_write_accompany, container, false);
+        selectedTags = new ArrayList<String>();
 
         initViews(view);
         setListeners(view);
@@ -46,12 +52,24 @@ public class WriteAccompanyFragment extends Fragment implements View.OnClickList
     private void initViews(View view) {
         tvStartDate = view.findViewById(R.id.tv_write_accompany_start);
         tvLastDate = view.findViewById(R.id.tv_write_accompany_last);
+
+        btnAccompany = view.findViewById(R.id.btn_write_accompany_tag_accompany);
+        btnStay = view.findViewById(R.id.btn_write_accompany_tag_stay);
+        btnMeal = view.findViewById(R.id.btn_write_accompany_tag_meal);
+        btnTaxi = view.findViewById(R.id.btn_write_accompany_tag_taxi);
     }
 
     private void setListeners(View view) {
         tvStartDate.setOnClickListener(this);
         tvLastDate.setOnClickListener(this);
+
+        view.findViewById(R.id.btn_write_accompany_write).setOnClickListener(this);
         view.findViewById(R.id.iv_write_accompany_close).setOnClickListener(this);
+
+        btnAccompany.setOnClickListener(this);
+        btnStay.setOnClickListener(this);
+        btnMeal.setOnClickListener(this);
+        btnTaxi.setOnClickListener(this);
     }
 
     private void setCalendars() {
@@ -107,12 +125,41 @@ public class WriteAccompanyFragment extends Fragment implements View.OnClickList
                 ).show();
                 break;
 
+            case R.id.btn_write_accompany_tag_accompany:
+                tagToggle(btnAccompany, "accompany");
+                break;
+
+            case R.id.btn_write_accompany_tag_stay:
+                tagToggle(btnStay, "stay");
+                break;
+
+            case R.id.btn_write_accompany_tag_meal:
+                tagToggle(btnMeal, "meal");
+                break;
+
+            case R.id.btn_write_accompany_tag_taxi:
+                tagToggle(btnTaxi, "taxi");
+                break;
+
+            case R.id.btn_write_accompany_write:
+                break;
+
             case R.id.iv_write_accompany_close:
                 getActivity().onBackPressed();
                 break;
 
             default:
                 break;
+        }
+    }
+
+    private void tagToggle(Button btn, String tag) {
+        if (selectedTags.contains(tag)) {
+            selectedTags.remove(tag);
+            btn.setBackgroundResource(R.drawable.gray_lable);
+        } else {
+            selectedTags.add(tag);
+            btn.setBackgroundResource(R.drawable.green_label);
         }
     }
 }

@@ -7,8 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.hjw_front.R;
+import com.example.hjw_front.repositories.ScheduleRepository;
 import com.example.hjw_front.vo.ScheduleVO;
 
 import java.util.ArrayList;
@@ -16,9 +18,11 @@ import java.util.ArrayList;
 public class ScheduleListAdapter extends BaseAdapter {
     private final String TAG = "[ScheduleAdapter]";
     private ArrayList<ScheduleVO> listViewItemList;
+    private ScheduleRepository repository;
 
     public ScheduleListAdapter(ArrayList<ScheduleVO> list) {
         this.listViewItemList = list;
+        this.repository = ScheduleRepository.getInstance();
     }
 
     @Override
@@ -58,6 +62,17 @@ public class ScheduleListAdapter extends BaseAdapter {
         // EditText에 출력할 형식 지정
         tvTime.setText(state + " " + hour + "시 " + scheduleVO.getMinutes() + "분");
         tvContent.setText(scheduleVO.getContent());
+
+        // Delete 이벤트 설정
+        convertView.findViewById(R.id.btn_schedule_delete).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                repository.delete(scheduleVO.getId());
+                Toast.makeText(context, "해당 일정이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                listViewItemList.remove(position);
+                notifyDataSetChanged();
+            }
+        });
 
         return convertView;
     }

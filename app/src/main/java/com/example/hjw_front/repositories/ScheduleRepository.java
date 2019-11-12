@@ -1,5 +1,9 @@
 package com.example.hjw_front.repositories;
 
+import android.util.Log;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -8,7 +12,10 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.HashMap;
 import java.util.Map;
 
+import androidx.annotation.NonNull;
+
 public class ScheduleRepository {
+    private final String TAG = "[ScheduleRepository]";
     private static ScheduleRepository instance;
     private CollectionReference reference;
 
@@ -40,5 +47,21 @@ public class ScheduleRepository {
                 .whereEqualTo("month", month)
                 .whereEqualTo("day", day)
                 .get();
+    }
+
+    public void delete(String id) {
+        reference.document(id).delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, id + " 삭제 완료");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, id + " 삭제 실패", e);
+                    }
+                });
     }
 }

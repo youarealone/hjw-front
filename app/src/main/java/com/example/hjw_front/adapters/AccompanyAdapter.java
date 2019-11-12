@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -51,7 +50,10 @@ public class AccompanyAdapter extends BaseAdapter {
         TextView tvUsername = convertView.findViewById(R.id.tv_username);
         TextView tvStartDate = convertView.findViewById(R.id.tv_accompany_start);
         TextView tvEndDate = convertView.findViewById(R.id.tv_accompany_end);
-        Button btnLabel = convertView.findViewById(R.id.btn_accompany_label);
+        TextView tvLabelAccompany = convertView.findViewById(R.id.tv_accompany_label_accompany);
+        TextView tvLabelStay = convertView.findViewById(R.id.tv_accompany_label_stay);
+        TextView tvLabelMeal = convertView.findViewById(R.id.tv_accompany_label_meal);
+        TextView tvLabelTaxi = convertView.findViewById(R.id.tv_accompany_label_taxi);
         TextView tvContent = convertView.findViewById(R.id.tv_accompany_content);
 
         AccompanyPostVO vo = list.get(position);
@@ -60,8 +62,30 @@ public class AccompanyAdapter extends BaseAdapter {
         tvUsername.setText(vo.getUsername());
         tvStartDate.setText(DateFormatter.format(vo.getStartDate(), "yy.MM.dd"));
         tvEndDate.setText(DateFormatter.format(vo.getLastDate(), "yy.MM.dd"));
-        btnLabel.setText(vo.getTag());
         tvContent.setText(vo.getContent());
+
+        for (String tag: vo.getTags()) {
+            switch (tag) {
+                case "#동행":
+                    tvLabelAccompany.setVisibility(View.VISIBLE);
+                    break;
+
+                case "#숙박":
+                    tvLabelStay.setVisibility(View.VISIBLE);
+                    break;
+
+                case "#겸상":
+                    tvLabelMeal.setVisibility(View.VISIBLE);
+                    break;
+
+                case "#택시":
+                    tvLabelTaxi.setVisibility(View.VISIBLE);
+                    break;
+
+                default:
+                    break;
+            }
+        }
 
         return convertView;
     }

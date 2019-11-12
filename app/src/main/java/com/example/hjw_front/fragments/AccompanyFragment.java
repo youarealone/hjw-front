@@ -32,6 +32,10 @@ public class AccompanyFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_accompany, container, false);
 
+        ArrayList<String> mockTags = new ArrayList<>();
+        mockTags.add("#동행");
+        mockTags.add("#택시");
+
         ArrayList<AccompanyPostVO> posts = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             AccompanyPostVO post = new AccompanyPostVO(
@@ -41,7 +45,7 @@ public class AccompanyFragment extends Fragment {
                     , currentUser.getDisplayName()
                     , new Date()
                     , new Date()
-                    , "#동행"
+                    , mockTags
                     , "우후루꾸루후 슈퍼스타"
             );
             posts.add(post);

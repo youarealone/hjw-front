@@ -1,7 +1,6 @@
 package com.example.hjw_front.fragments;
 
 import android.app.DatePickerDialog;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,10 +10,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import com.example.hjw_front.R;
 import com.example.hjw_front.vo.AccompanyPostVO;
@@ -26,6 +21,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 public class WriteAccompanyFragment extends Fragment implements View.OnClickListener {
     private TextView tvStartDate;
@@ -138,19 +137,19 @@ public class WriteAccompanyFragment extends Fragment implements View.OnClickList
                 break;
 
             case R.id.btn_write_accompany_tag_accompany:
-                tagToggle(btnAccompany, "accompany");
+                tagToggle(btnAccompany, "#동행");
                 break;
 
             case R.id.btn_write_accompany_tag_stay:
-                tagToggle(btnStay, "stay");
+                tagToggle(btnStay, "#숙박");
                 break;
 
             case R.id.btn_write_accompany_tag_meal:
-                tagToggle(btnMeal, "meal");
+                tagToggle(btnMeal, "#겸상");
                 break;
 
             case R.id.btn_write_accompany_tag_taxi:
-                tagToggle(btnTaxi, "taxi");
+                tagToggle(btnTaxi, "#택시");
                 break;
 
             case R.id.btn_write_accompany_write:

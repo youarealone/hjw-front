@@ -98,9 +98,9 @@ public class AccompanyPostVO {
                 ", uid='" + uid + '\'' +
                 ", photoURL='" + photoURL + '\'' +
                 ", username='" + username + '\'' +
-                ", startDate='" + startDate + '\'' +
-                ", lastDate='" + lastDate + '\'' +
-                ", tag='" + tag + '\'' +
+                ", startDate=" + startDate +
+                ", lastDate=" + lastDate +
+                ", tags=" + tags +
                 ", content='" + content + '\'' +
                 '}';
     }

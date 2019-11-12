@@ -10,8 +10,10 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.hjw_front.R;
+import com.example.hjw_front.repositories.AccompanyPostRepository;
 import com.example.hjw_front.vo.AccompanyPostVO;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -43,12 +45,15 @@ public class WriteAccompanyFragment extends Fragment implements View.OnClickList
     private ArrayList<String> selectedTags;
     private Date startDate, lastDate;
 
+    AccompanyPostRepository repository;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_write_accompany, container, false);
         selectedTags = new ArrayList<String>();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        repository = AccompanyPostRepository.getInstance();
 
         initViews(view);
         setListeners(view);
@@ -154,7 +159,6 @@ public class WriteAccompanyFragment extends Fragment implements View.OnClickList
 
             case R.id.btn_write_accompany_write:
                 AccompanyPostVO accompanyPostVO = new AccompanyPostVO();
-
                 accompanyPostVO.setUid(currentUser.getUid());
                 accompanyPostVO.setPhotoURL(currentUser.getPhotoUrl().toString());
                 accompanyPostVO.setUsername(currentUser.getDisplayName());
@@ -162,8 +166,10 @@ public class WriteAccompanyFragment extends Fragment implements View.OnClickList
                 accompanyPostVO.setLastDate(lastDate);
                 accompanyPostVO.setTags(selectedTags);
                 accompanyPostVO.setContent(etContent.getText().toString());
+                repository.create(accompanyPostVO);
 
-                Log.d("[동행작성]", accompanyPostVO.toString());
+                Toast.makeText(getContext(), "게시글을 성공적으로 작성했습니다.", Toast.LENGTH_SHORT).show();
+                getActivity().onBackPressed();
 
                 break;
 

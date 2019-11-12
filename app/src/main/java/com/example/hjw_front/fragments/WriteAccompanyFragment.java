@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,15 +17,20 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.hjw_front.R;
+import com.example.hjw_front.vo.AccompanyPostVO;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class WriteAccompanyFragment extends Fragment implements View.OnClickListener {
     private TextView tvStartDate;
     private TextView tvLastDate;
+    private EditText etContent;
 
     private Button btnAccompany;
     private Button btnStay;
@@ -34,13 +40,16 @@ public class WriteAccompanyFragment extends Fragment implements View.OnClickList
     private Calendar startCalendar, lastCalendar;
     private DatePickerDialog.OnDateSetListener startDatePicker, lastDatePicker;
 
+    private FirebaseUser currentUser;
     private ArrayList<String> selectedTags;
+    private Date startDate, lastDate;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_write_accompany, container, false);
         selectedTags = new ArrayList<String>();
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         initViews(view);
         setListeners(view);
@@ -52,6 +61,7 @@ public class WriteAccompanyFragment extends Fragment implements View.OnClickList
     private void initViews(View view) {
         tvStartDate = view.findViewById(R.id.tv_write_accompany_start);
         tvLastDate = view.findViewById(R.id.tv_write_accompany_last);
+        etContent = view.findViewById(R.id.et_accompany_content);
 
         btnAccompany = view.findViewById(R.id.btn_write_accompany_tag_accompany);
         btnStay = view.findViewById(R.id.btn_write_accompany_tag_stay);
@@ -84,7 +94,8 @@ public class WriteAccompanyFragment extends Fragment implements View.OnClickList
                 String myFormat = "yy.MM.dd";
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA);
 
-                tvStartDate.setText(sdf.format(startCalendar.getTime()));
+                startDate = startCalendar.getTime();
+                tvStartDate.setText(sdf.format(startDate));
             }
         };
 
@@ -99,7 +110,8 @@ public class WriteAccompanyFragment extends Fragment implements View.OnClickList
                 String myFormat = "yy.MM.dd";
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA);
 
-                tvLastDate.setText(sdf.format(lastCalendar.getTime()));
+                lastDate = lastCalendar.getTime();
+                tvLastDate.setText(sdf.format(lastDate));
             }
         };
     }
@@ -142,6 +154,18 @@ public class WriteAccompanyFragment extends Fragment implements View.OnClickList
                 break;
 
             case R.id.btn_write_accompany_write:
+                AccompanyPostVO accompanyPostVO = new AccompanyPostVO();
+
+                accompanyPostVO.setUid(currentUser.getUid());
+                accompanyPostVO.setPhotoURL(currentUser.getPhotoUrl().toString());
+                accompanyPostVO.setUsername(currentUser.getDisplayName());
+                accompanyPostVO.setStartDate(startDate);
+                accompanyPostVO.setLastDate(lastDate);
+                accompanyPostVO.setTags(selectedTags);
+                accompanyPostVO.setContent(etContent.getText().toString());
+
+                Log.d("[동행작성]", accompanyPostVO.toString());
+
                 break;
 
             case R.id.iv_write_accompany_close:

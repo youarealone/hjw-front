@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class AccompanyFragment extends Fragment {
     private FirebaseUser currentUser;
@@ -38,8 +39,8 @@ public class AccompanyFragment extends Fragment {
                     , currentUser.getUid()
                     , currentUser.getPhotoUrl().toString()
                     , currentUser.getDisplayName()
-                    , "2018.05.05"
-                    , "2018.07.01"
+                    , new Date()
+                    , new Date()
                     , "#동행"
                     , "우후루꾸루후 슈퍼스타"
             );

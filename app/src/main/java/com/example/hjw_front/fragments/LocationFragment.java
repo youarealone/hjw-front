@@ -67,11 +67,11 @@ public class LocationFragment extends Fragment implements
         PlacesListener {
 
 
-
     private static final String TAG = "googlemap_example";
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
-    private static final int UPDATE_INTERVAL_MS = 1000;  // 1초
-    private static final int FASTEST_UPDATE_INTERVAL_MS = 500; // 0.5초
+    private static final int UPDATE_INTERVAL_MS = 1000 * 60 * 1;  // 1분 단위 시간 갱신
+    private static final int FASTEST_UPDATE_INTERVAL_MS = 1000 * 30; // 30초 단위로 화면 갱신
+
     // onRequestPermissionsResult에서 수신된 결과에서 ActivityCompat.requestPermissions를 사용한 퍼미션 요청을 구별하기 위해 사용됩니다.
     private static final int PERMISSIONS_REQUEST_CODE = 100;
     boolean needRequest = false;
@@ -81,7 +81,7 @@ public class LocationFragment extends Fragment implements
     String[] REQUIRED_PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};  // 외부 저장소
     Location mCurrentLocatiion;
     LatLng currentPosition;
-
+    private Button btnLocation;
     private Marker currentMarker = null;
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationRequest locationRequest;
@@ -102,45 +102,15 @@ public class LocationFragment extends Fragment implements
     public void onCreate(Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
+
     }
 
     private GoogleMap mMap;
     List<Marker> previous_marker = null;
 
     private Activity activity;
-    LocationCallback locationCallback = new LocationCallback() {
-        @Override
-        public void onLocationResult(LocationResult locationResult) {
-            super.onLocationResult(locationResult);
-
-            List<Location> locationList = locationResult.getLocations();
-
-            if (locationList.size() > 0) {
-                location = locationList.get(locationList.size() - 1);
-                //location = locationList.get(0);
-
-                currentPosition
-                        = new LatLng(location.getLatitude(), location.getLongitude());
 
 
-                String markerTitle = getCurrentAddress(currentPosition);
-                tv_addr.setText(markerTitle);
-                String markerSnippet = "위도:" + String.valueOf(location.getLatitude())
-                        + " 경도:" + String.valueOf(location.getLongitude());
-
-                Log.d(TAG, "onLocationResult : " + markerSnippet);
-
-
-                //현재 위치에 마커 생성하고 이동
-                setCurrentLocation(location, markerTitle, markerSnippet);
-
-                mCurrentLocatiion = location;
-            }
-
-
-        }
-
-    };
     private TextView tv_addr;
     private Button findPar, findHos;
 
@@ -151,6 +121,7 @@ public class LocationFragment extends Fragment implements
         if (context instanceof Activity)
             this.activity = (Activity) context;
     }
+
     private View mLayout;
 
     @Override
@@ -174,16 +145,16 @@ public class LocationFragment extends Fragment implements
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_location, container, false);
-
+        btnLocation = view.findViewById(R.id.btn_current);
         findPar = view.findViewById(R.id.findFar);
         findHos = view.findViewById(R.id.findHos);
         tv_addr = view.findViewById(R.id.tv_addr_doro);
         gmap = (MapView) view.findViewById(R.id.map);
-        locationRequest = new LocationRequest()
-                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                .setInterval(UPDATE_INTERVAL_MS)
-                .setFastestInterval(FASTEST_UPDATE_INTERVAL_MS);
         mLayout = view.findViewById(R.id.loc);
+        locationRequest = new LocationRequest()
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY) // 정확도를 최우선적으로 고려
+                .setInterval(UPDATE_INTERVAL_MS) // 위치가 Update 되는 주기
+                .setFastestInterval(FASTEST_UPDATE_INTERVAL_MS); // 위치 획득후 업데이트되는 주기
 
         LocationSettingsRequest.Builder builder =
                 new LocationSettingsRequest.Builder();
@@ -213,6 +184,45 @@ public class LocationFragment extends Fragment implements
             }
         });
 
+        btnLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LocationCallback locationCallback = new LocationCallback() {
+                    @Override
+                    public void onLocationResult(LocationResult locationResult) {
+                        super.onLocationResult(locationResult);
+
+                        List<Location> locationList = locationResult.getLocations();
+
+                        if (locationList.size() > 0) {
+                            location = locationList.get(locationList.size() - 1);
+                            //location = locationList.get(0);
+
+                            currentPosition
+                                    = new LatLng(location.getLatitude(), location.getLongitude());
+
+
+                            String markerTitle = getCurrentAddress(currentPosition);
+                            tv_addr.setText(markerTitle);
+                            String markerSnippet = "위도:" + String.valueOf(location.getLatitude())
+                                    + " 경도:" + String.valueOf(location.getLongitude());
+
+//                            Log.d(TAG, "onLocationResult : " + markerSnippet);
+
+
+                            //현재 위치에 마커 생성하고 이동
+                            setCurrentLocation(location, markerTitle, markerSnippet);
+
+                            mCurrentLocatiion = location;
+                        }
+
+
+                    }
+
+                };
+            }
+        });
+
 
         return view;
     }
@@ -221,11 +231,12 @@ public class LocationFragment extends Fragment implements
     public void onStart() {
         super.onStart();
 
-        Log.d(TAG, "onStart");
+//        Log.d(TAG, "onStart"); //지도 시작
 
+        //퍼미션 체크
         if (checkPermission()) {
 
-            Log.d(TAG, "onStart : call mFusedLocationClient.requestLocationUpdates");
+//            Log.d(TAG, "onStart : call mFusedLocationClient.requestLocationUpdates");
             mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
 
             if (mMap != null)
@@ -242,15 +253,16 @@ public class LocationFragment extends Fragment implements
         super.onStop();
 
         if (mFusedLocationClient != null) {
-
-            Log.d(TAG, "onStop : call stopLocationUpdates");
+            //정지
+//            Log.d(TAG, "onStop : call stopLocationUpdates");
             mFusedLocationClient.removeLocationUpdates(locationCallback);
         }
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        Log.d(TAG, "onMapReady :");
+        // 구글 맵 준비
+//        Log.d(TAG, "onMapReady :");
 
         mMap = googleMap;
 
@@ -312,8 +324,8 @@ public class LocationFragment extends Fragment implements
 
             @Override
             public void onMapClick(LatLng latLng) {
-
-                Log.d(TAG, "onMapClick :");
+                //맵 클릭
+//                Log.d(TAG, "onMapClick :");
             }
         });
 
@@ -322,8 +334,8 @@ public class LocationFragment extends Fragment implements
     private void startLocationUpdates() {
 
         if (!checkLocationServicesStatus()) {
-
-            Log.d(TAG, "startLocationUpdates : call showDialogForLocationServiceSetting");
+            // 위치 체크
+//            Log.d(TAG, "startLocationUpdates : call showDialogForLocationServiceSetting");
             showDialogForLocationServiceSetting();
         } else {
 
@@ -341,7 +353,7 @@ public class LocationFragment extends Fragment implements
             }
 
 
-            Log.d(TAG, "startLocationUpdates : call mFusedLocationClient.requestLocationUpdates");
+//            Log.d(TAG, "startLocationUpdates : call mFusedLocationClient.requestLocationUpdates");
 
             mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
 
@@ -626,8 +638,7 @@ public class LocationFragment extends Fragment implements
 
     }
 
-    public void showPlaceHospital(LatLng location)
-    {
+    public void showPlaceHospital(LatLng location) {
         mMap.clear();//지도 클리어
 
         if (previous_marker != null)
@@ -643,8 +654,7 @@ public class LocationFragment extends Fragment implements
                 .execute();
     }
 
-    public void showPlaceParmacy(LatLng location)
-    {
+    public void showPlaceParmacy(LatLng location) {
         mMap.clear();//지도 클리어
 
         if (previous_marker != null)
@@ -660,5 +670,38 @@ public class LocationFragment extends Fragment implements
                 .execute();
     }
 
+    LocationCallback locationCallback = new LocationCallback() {
+        @Override
+        public void onLocationResult(LocationResult locationResult) {
+            super.onLocationResult(locationResult);
+
+            List<Location> locationList = locationResult.getLocations();
+
+            if (locationList.size() > 0) {
+                location = locationList.get(locationList.size() - 1);
+                //location = locationList.get(0);
+
+                currentPosition
+                        = new LatLng(location.getLatitude(), location.getLongitude());
+
+
+                String markerTitle = getCurrentAddress(currentPosition);
+                tv_addr.setText(markerTitle);
+                String markerSnippet = "위도:" + String.valueOf(location.getLatitude())
+                        + " 경도:" + String.valueOf(location.getLongitude());
+
+//                Log.d(TAG, "onLocationResult : " + markerSnippet);
+
+
+                //현재 위치에 마커 생성하고 이동
+                setCurrentLocation(location, markerTitle, markerSnippet);
+
+                mCurrentLocatiion = location;
+            }
+
+
+        }
+
+    };
 
 }

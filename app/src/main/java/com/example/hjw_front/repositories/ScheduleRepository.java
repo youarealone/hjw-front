@@ -46,6 +46,8 @@ public class ScheduleRepository {
                 .whereEqualTo("year", year)
                 .whereEqualTo("month", month)
                 .whereEqualTo("day", day)
+                .orderBy("hour")
+                .orderBy("minutes")
                 .get();
     }
 

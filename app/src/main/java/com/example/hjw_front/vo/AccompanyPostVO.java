@@ -1,26 +1,29 @@
 package com.example.hjw_front.vo;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 public class AccompanyPostVO {
     private String id;
     private String uid;
     private String photoURL;
     private String username;
-    private String startDate;
-    private String endDate;
-    private String tag;
+    private Date startDate;
+    private Date lastDate;
+    private ArrayList<String> tags;
     private String content;
 
     public AccompanyPostVO() {
     }
 
-    public AccompanyPostVO(String id, String uid, String photoURL, String username, String startDate, String endDate, String tag, String content) {
+    public AccompanyPostVO(String id, String uid, String photoURL, String username, Date startDate, Date lastDate, ArrayList<String> tags, String content) {
         this.id = id;
         this.uid = uid;
         this.photoURL = photoURL;
         this.username = username;
         this.startDate = startDate;
-        this.endDate = endDate;
-        this.tag = tag;
+        this.lastDate = lastDate;
+        this.tags = tags;
         this.content = content;
     }
 
@@ -56,28 +59,28 @@ public class AccompanyPostVO {
         this.username = username;
     }
 
-    public String getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public String getEndDate() {
-        return endDate;
+    public Date getLastDate() {
+        return lastDate;
     }
 
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
+    public void setLastDate(Date lastDate) {
+        this.lastDate = lastDate;
     }
 
-    public String getTag() {
-        return tag;
+    public ArrayList<String> getTags() {
+        return tags;
     }
 
-    public void setTag(String tag) {
-        this.tag = tag;
+    public void setTags(ArrayList<String> tags) {
+        this.tags = tags;
     }
 
     public String getContent() {
@@ -86,5 +89,19 @@ public class AccompanyPostVO {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    @Override
+    public String toString() {
+        return "AccompanyPostVO{" +
+                "id='" + id + '\'' +
+                ", uid='" + uid + '\'' +
+                ", photoURL='" + photoURL + '\'' +
+                ", username='" + username + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", lastDate='" + lastDate + '\'' +
+                ", tag='" + tag + '\'' +
+                ", content='" + content + '\'' +
+                '}';
     }
 }

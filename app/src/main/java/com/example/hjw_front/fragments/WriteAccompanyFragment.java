@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
@@ -20,23 +21,40 @@ import java.util.Locale;
 
 public class WriteAccompanyFragment extends Fragment implements View.OnClickListener {
     private TextView tvStartDate;
-    private TextView tvEndDate;
+    private TextView tvLastDate;
 
-    private Calendar startCalendar, endCalendar;
-    private DatePickerDialog.OnDateSetListener startDatePicker, endDatePicker;
+    private Button btnAccompany;
+    private Button btnStay;
+    private Button btnMeal;
+    private Button btnTaxi;
+
+    private Calendar startCalendar, lastCalendar;
+    private DatePickerDialog.OnDateSetListener startDatePicker, lastDatePicker;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_write_accompany, container, false);
 
+        initViews(view);
+        setListeners(view);
+        setCalendars();
+
+        return view;
+    }
+
+    private void initViews(View view) {
         tvStartDate = view.findViewById(R.id.tv_write_accompany_start);
-        tvEndDate = view.findViewById(R.id.tv_write_accompany_end);
+        tvLastDate = view.findViewById(R.id.tv_write_accompany_last);
+    }
 
+    private void setListeners(View view) {
         tvStartDate.setOnClickListener(this);
-        tvEndDate.setOnClickListener(this);
+        tvLastDate.setOnClickListener(this);
         view.findViewById(R.id.iv_write_accompany_close).setOnClickListener(this);
+    }
 
+    private void setCalendars() {
         startCalendar = Calendar.getInstance();
         startDatePicker = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -52,22 +70,20 @@ public class WriteAccompanyFragment extends Fragment implements View.OnClickList
             }
         };
 
-        endCalendar = Calendar.getInstance();
-        endDatePicker = new DatePickerDialog.OnDateSetListener() {
+        lastCalendar = Calendar.getInstance();
+        lastDatePicker = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                endCalendar.set(Calendar.YEAR, year);
-                endCalendar.set(Calendar.MONTH, month);
-                endCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                lastCalendar.set(Calendar.YEAR, year);
+                lastCalendar.set(Calendar.MONTH, month);
+                lastCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
                 String myFormat = "yy.MM.dd";
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA);
 
-                tvEndDate.setText(sdf.format(endCalendar.getTime()));
+                tvLastDate.setText(sdf.format(lastCalendar.getTime()));
             }
         };
-
-        return view;
     }
 
     @Override
@@ -82,12 +98,12 @@ public class WriteAccompanyFragment extends Fragment implements View.OnClickList
                 ).show();
                 break;
 
-            case R.id.tv_write_accompany_end:
+            case R.id.tv_write_accompany_last:
                 new DatePickerDialog(getContext()
-                        , endDatePicker
-                        , endCalendar.get(Calendar.YEAR)
-                        , endCalendar.get(Calendar.MONTH)
-                        , endCalendar.get(Calendar.DAY_OF_MONTH)
+                        , lastDatePicker
+                        , lastCalendar.get(Calendar.YEAR)
+                        , lastCalendar.get(Calendar.MONTH)
+                        , lastCalendar.get(Calendar.DAY_OF_MONTH)
                 ).show();
                 break;
 

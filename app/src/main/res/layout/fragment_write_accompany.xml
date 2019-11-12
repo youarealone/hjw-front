@@ -48,7 +48,7 @@
             android:textColor="@color/gray6"/>
 
         <TextView
-            android:id="@+id/tv_write_accompany_end"
+            android:id="@+id/tv_write_accompany_last"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="5dp"
@@ -90,7 +90,7 @@
             android:textSize="16dp"/>
 
         <Button
-            android:id="@+id/btn_write_accompany_tag_eat"
+            android:id="@+id/btn_write_accompany_tag_meal"
             android:layout_width="70dp"
             android:layout_height="30dp"
             android:layout_marginEnd="5dp"

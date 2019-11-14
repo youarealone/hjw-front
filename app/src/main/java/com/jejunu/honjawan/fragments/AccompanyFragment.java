@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class AccompanyFragment extends Fragment {
     private FirebaseUser currentUser;
@@ -31,6 +32,10 @@ public class AccompanyFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_accompany, container, false);
 
+        ArrayList<String> mockTags = new ArrayList<>();
+        mockTags.add("#동행");
+        mockTags.add("#택시");
+
         ArrayList<AccompanyPostVO> posts = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             AccompanyPostVO post = new AccompanyPostVO(
@@ -38,9 +43,9 @@ public class AccompanyFragment extends Fragment {
                     , currentUser.getUid()
                     , currentUser.getPhotoUrl().toString()
                     , currentUser.getDisplayName()
-                    , "2018.05.05"
-                    , "2018.07.01"
-                    , "#동행"
+                    , new Date()
+                    , new Date()
+                    , mockTags
                     , "우후루꾸루후 슈퍼스타"
             );
             posts.add(post);

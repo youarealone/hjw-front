@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.hjw_front">
+    package="com.jejunu.honjawan">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:networkSecurityConfig="@xml/network_security_config"
         android:theme="@style/AppTheme">
-        <activity android:name=".fragments.BookmarkFragment"></activity>
+        <activity android:name="com.jejunu.honjawan.fragments.BookmarkFragment"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -25,7 +25,7 @@
         <uses-library android:name="org.apache.http.legacy" android:required="false"/>
 
         <activity
-            android:name=".SplashActivity"
+            android:name="com.jejunu.honjawan.SplashActivity"
             android:theme="@style/splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,11 +33,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name="com.jejunu.honjawan.MainActivity">
 
 
         </activity>
-        <activity android:name=".GoogleLoginActivity" />
+        <activity android:name="com.jejunu.honjawan.GoogleLoginActivity" />
     </application>
 
 </manifest>

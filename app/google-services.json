@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:1081397969461:android:6f9cfaf09d409e3edaa77c",
         "android_client_info": {
-          "package_name": "com.example.hjw_front"
+          "package_name": "com.jejunu.honjawan"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "1081397969461-tmv4ultq0prdv2sgbdbbhme0lla9d720.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.hjw_front",
+            "package_name": "com.jejunu.honjawan",
             "certificate_hash": "d34887ed47335f4276bc09fb6f52d222ab040a8c"
           }
         },
@@ -26,7 +26,7 @@
           "client_id": "1081397969461-rrejoce22k15in49long62evbqfom9bm.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.hjw_front",
+            "package_name": "com.jejunu.honjawan",
             "certificate_hash": "5e34bc482f0731e9ef25f2606d1cc67d46048608"
           }
         },

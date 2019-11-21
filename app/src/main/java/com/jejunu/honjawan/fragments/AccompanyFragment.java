@@ -10,12 +10,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.jejunu.honjawan.R;
 import com.jejunu.honjawan.adapters.AccompanyAdapter;
 import com.jejunu.honjawan.utils.FragmentChanger;
 import com.jejunu.honjawan.vo.AccompanyPostVO;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -46,7 +46,7 @@ public class AccompanyFragment extends Fragment {
                     , new Date()
                     , new Date()
                     , mockTags
-                    , "우후루꾸루후 슈퍼스타"
+                    , "식사 같이 하실분 구해요~"
             );
             posts.add(post);
         }

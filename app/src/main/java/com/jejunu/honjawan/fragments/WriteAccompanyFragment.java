@@ -11,6 +11,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.jejunu.honjawan.R;
@@ -22,10 +26,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 public class WriteAccompanyFragment extends Fragment implements View.OnClickListener {
     private TextView tvStartDate;
@@ -149,7 +149,7 @@ public class WriteAccompanyFragment extends Fragment implements View.OnClickList
                 break;
 
             case R.id.btn_write_accompany_tag_meal:
-                tagToggle(btnMeal, "#겸상");
+                tagToggle(btnMeal, "#식사");
                 break;
 
             case R.id.btn_write_accompany_tag_taxi:

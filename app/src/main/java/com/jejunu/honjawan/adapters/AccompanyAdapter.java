@@ -74,7 +74,7 @@ public class AccompanyAdapter extends BaseAdapter {
                     tvLabelStay.setVisibility(View.VISIBLE);
                     break;
 
-                case "#겸상":
+                case "#식사":
                     tvLabelMeal.setVisibility(View.VISIBLE);
                     break;
 

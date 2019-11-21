@@ -10,6 +10,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 import com.jejunu.honjawan.adapters.FragmentPagerItemAdapter;
 import com.jejunu.honjawan.fragments.AccompanyFragment;
 import com.jejunu.honjawan.fragments.BookmarkFragment;
@@ -21,10 +25,6 @@ import com.jejunu.honjawan.fragments.SearchFragment;
 import com.jejunu.honjawan.fragments.SosFragment;
 import com.jejunu.honjawan.utils.FragmentChanger;
 import com.jejunu.honjawan.utils.PermissionChecker;
-import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.FirebaseDatabase;
 
 import static com.jejunu.honjawan.utils.RequestCode.RC_GOOGLE_LOGIN;
 
@@ -115,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new ScheduleFragment(), "오늘뭐할거?");
         adapter.addFragment(new SosFragment(), "SOS!");
         adapter.addFragment(new BookmarkFragment(), "어디좋안?");
+        ;
 //        adapter.addFragment(new SosFragment(), "마이혼자완");
         viewPager.setAdapter(adapter);
     }
